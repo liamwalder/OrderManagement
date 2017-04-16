@@ -1,0 +1,14 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,600);
+
+// Variables
+@import "variables";
+@import "basic-dashboard";
+@import "statistic";
+@import "shared";
+@import "entity-table";
+@import "pages/customers";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";

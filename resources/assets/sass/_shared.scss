@@ -1,0 +1,109 @@
+
+
+/**
+* Buttons
+*/
+.grey {
+  border: none !important;
+  color: $black !important;
+  background-color: $grey !important;
+  &:hover {
+    background-color: $greyHover !important;
+  }
+  &.hollow {
+    color: $grey !important;
+    background-color: $black !important;
+    border: 1px solid $grey !important;
+  }
+}
+
+.green {
+  border: none !important;
+  color: $white !important;
+  background-color: $green !important;
+  &:hover {
+    color: $white !important;
+    background-color: $greenHover !important;
+  }
+  &.hollow {
+    color: $green !important;
+    background-color: $white !important;
+    border: 1px solid $green !important;
+  }
+}
+
+.orange {
+  border: none !important;
+  color: $white !important;
+  background-color: $orange !important;
+  &:hover {
+    color: $white !important;
+    background-color: $orangeHover !important;
+  }
+  &.hollow {
+    color: $orange !important;
+    background-color: $white !important;
+    border: 1px solid $orange !important;
+    &:hover {
+      color: $white !important;
+      background-color: $orange !important;
+    }
+  }
+}
+
+.red {
+  border: none !important;
+  color: $white !important;
+  background-color: $red !important;
+  &:hover {
+    color: $white !important;
+    background-color: $redHover !important;
+  }
+  &.hollow {
+    color: $red !important;
+    background-color: $white !important;
+    border: 1px solid $red !important;
+    &:hover {
+      color: $white !important;
+      background-color: $red !important;
+    }
+  }
+}
+
+.modal {
+  overflow: scroll !important;
+}
+
+form {
+  label {
+    text-transform: uppercase;
+  }
+}
+
+.modal {
+  .modal-content {
+    border-radius: 2px;
+    box-shadow: none;
+
+    button[type="submit"] {
+      width: 100%;
+    }
+
+    input, textarea {
+      @include inputText()
+    }
+
+  }
+}
+
+.errors {
+  div {
+    &:last-of-type {
+      margin-bottom: 15px;
+    }
+    p {
+      color: $red;
+      margin: 0;
+    }
+  }
+}

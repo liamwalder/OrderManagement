@@ -1,0 +1,64 @@
+// Order Statistic Widget //
+.order-statistic-widget.panel {
+  border: none;
+  border-radius: 0;
+
+  .panel-body {
+    text-align: center;
+    color: white;
+
+    &.red {
+      background-color: $red;
+    }
+
+    &.blue {
+      background-color: $blue;
+    }
+
+    &.purple {
+      background-color: $purple;
+    }
+
+    &.green {
+      background-color: $green;
+    }
+
+    h3 {
+      margin-top: 10px;
+    }
+    h5 {
+      margin-bottom: 0;
+    }
+    h4 {
+      margin: 0;
+      &:first-child {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .latest {
+    padding-bottom: 15px;
+    h5 {
+      text-transform: uppercase;
+      padding: 8px;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+    table {
+      margin-bottom: 0;
+      tr {
+        td {
+          border: none;
+          padding-top: 0;
+          padding-bottom: 0;
+
+          a {
+            color: grey;
+          }
+
+        }
+      }
+    }
+  }
+}
