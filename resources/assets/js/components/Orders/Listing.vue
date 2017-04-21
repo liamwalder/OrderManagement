@@ -31,6 +31,9 @@
                 } else if(key == 'customer') {
                     newValue = value.firstname + ' ' + value.surname;
 
+                } else if(key == 'value') {
+                    newValue = '£'+value;
+
                 } else if (key == 'status') {
                     let className  = '';
                     if (value == 'Placed') {
