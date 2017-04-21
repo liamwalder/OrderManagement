@@ -13,14 +13,14 @@ require('./frontend');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.component('customer-search-box', require('./components/Shared/CustomerSearchBox.vue'));
 Vue.component('errors', require('./components/Shared/Errors.vue'));
-
-
 Vue.component('search', require('./components/Shared/Search.vue'));
 Vue.component('pagination', require('./components/Listing/Pagination.vue'));
 Vue.component('statistic-panel', require('./components/Dashboard/StatisticPanel.vue'));
 Vue.component('order-statistic-widget', require('./components/Dashboard/OrderStatisticWidget.vue'));
+
+
 
 /**
  * Orders
