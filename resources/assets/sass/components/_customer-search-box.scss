@@ -1,0 +1,29 @@
+#customer-search-box {
+  .results {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    .item {
+      border-top: 1px solid $grey;
+      background-color: $lightGrey;
+      &:hover {
+        background-color: $lightGreyHover;
+        cursor: pointer;
+      }
+      padding: 2%;
+      span {
+        width: 100%;
+        display: inline-block;
+        font-weight: 700;
+      }
+      ul {
+        padding-left: 18px;
+        li {
+          list-style-type: disc;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
