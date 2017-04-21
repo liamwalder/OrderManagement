@@ -9,6 +9,8 @@
 @import "shared";
 @import "entity-table";
 @import "pages/customers";
+@import "pages/_order-creation";
+@import "components/customer-search-box";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";

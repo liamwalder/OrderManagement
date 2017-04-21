@@ -53,6 +53,9 @@ $green: #2ecc71;
 $greenHover: darken($green, 5%);
 $grey: #e0e0e0;
 $greyHover: darken($grey, 5%);
+$lightGrey: #EFEFEF;
+$lightGreyHover: darken($lightGrey, 5%);
+
 
 @mixin inputText() {
   background-color: #EFEFEF;

@@ -58,22 +58,7 @@ body {
     display: flex;
     float: right;
 
-    .search {
-      margin-right: 5%;
 
-      span.input-group-addon {
-        border: none;
-        border-top: 2px solid #e0e0e0;
-      }
-
-      input {
-        background-color: #EFEFEF;
-        border: none;
-        box-shadow: none;
-        border-top: 2px solid #e0e0e0;
-      }
-
-    }
   }
 
 }
