@@ -114,7 +114,6 @@ class OrderRepository extends Repository
             if (!$this->isJoined($queryBuilder, 'addresses')) {
                 $queryBuilder->leftJoin('addresses', 'orders.address_id', '=', 'addresses.id');
             }
-
             $queryBuilder
                 ->orWhere('addresses.address_1', 'like', '%'.$value.'%')
                 ->orWhere('addresses.address_2', 'like', '%'.$value.'%')
@@ -125,7 +124,6 @@ class OrderRepository extends Repository
             if (!$this->isJoined($queryBuilder, 'customers')) {
                 $queryBuilder->leftJoin('customers', 'orders.customer_id', '=', 'customers.id');
             }
-
             $queryBuilder
                 ->orWhere('customers.firstname', 'like', '%'.$value.'%')
                 ->orWhere('customers.surname', 'like', '%'.$value.'%');
@@ -133,8 +131,20 @@ class OrderRepository extends Repository
             if (!$this->isJoined($queryBuilder, 'order_statuses')) {
                 $queryBuilder->leftJoin('order_statuses', 'orders.status_id', '=', 'order_statuses.id');
             }
-
             $queryBuilder->orWhere('order_statuses.name', 'like', '%'.$value.'%');
+
+
+            /**
+             * @todo Implement searching by price on order listing
+             */
+//            if (!$this->isJoined($queryBuilder, 'order_product')) {
+//                $queryBuilder->leftJoin('order_product', 'orders.id', '=', 'order_product.order_id');
+//            }
+//            if (!$this->isJoined($queryBuilder, 'products')) {
+//                $queryBuilder->leftJoin('products', 'products.id', '=', 'order_product.product_id');
+//            }
+//            $queryBuilder->orWhere(\DB::raw("sum(products.price)"), 'like', '%'.$value.'%');
+
         }
 
         return $queryBuilder;
@@ -150,6 +160,15 @@ class OrderRepository extends Repository
         if ($orderBy) {
             $orderDirection = Input::get('direction');
             switch ($orderBy) {
+                case 'value':
+                    $queryBuilder
+                        ->select(['orders.*'])
+                        ->leftJoin('order_product', 'orders.id', '=', 'order_product.order_id')
+                        ->leftJoin('products', 'products.id', '=', 'order_product.product_id')
+                        ->groupBy('orders.id')
+                        ->orderBy(\DB::raw("sum(products.price)"), $orderDirection);
+                    break;
+
                 case 'status':
                     $queryBuilder
                         ->select(['orders.*'])
