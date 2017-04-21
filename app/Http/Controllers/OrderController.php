@@ -16,4 +16,12 @@ class OrderController extends Controller
         return view('orders.index');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('orders.create');
+    }
+
 }
