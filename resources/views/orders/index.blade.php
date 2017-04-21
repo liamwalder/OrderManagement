@@ -8,7 +8,7 @@
                 <form class="col-md-4 col-xl-5 col-lg-8 col-lg-offset-2 col-xl-offset-5">
                     <search :api-url="'/api/orders'"></search>
                 </form>
-                <a class="btn green" href="/">
+                <a class="btn green" href="{{ route('orders.create') }}">
                     <i class="glyphicon glyphicon-plus"></i>
                     Create a order
                 </a>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <order-table-listing
-        :columns="['id', 'status', 'customer', 'address', 'created_at']"
+        :columns="['id', 'status', 'value', 'customer', 'address', 'created_at']"
         :api-url="'{{ route('api.order.listing') }}?l='"
     >
 
