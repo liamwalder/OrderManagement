@@ -97,6 +97,7 @@
         methods: {
 
             search: function(searchTermValue) {
+                var self = this;
                 var gotAllData = false;
                 if (searchTermValue.length > 2) {
                     self.searchTerm = searchTermValue;
