@@ -38769,26 +38769,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             searchTerm: null,
-            customers: []
+            customers: null
         };
     },
 
     methods: {
         clickedAway: function clickedAway() {
             this.searchTerm = null;
-            this.customers = [];
+            this.customers = null;
         },
         search: function search() {
             var self = this;
             if (this.searchTerm.length > 2) {
                 var apiUrl = Routes.customer.list + '?search=' + this.searchTerm;
                 axios.get(apiUrl).then(function (response) {
+                    var customers = response.data.entities.items;
                     self.customers = response.data.entities.items;
                 }).catch(function (error) {
                     console.log(error);
                 });
             } else {
-                this.customers = [];
+                this.customers = null;
             }
         }
     }
@@ -68818,7 +68819,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.searchTerm = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('ul', {
+  })]), _vm._v(" "), (_vm.customers) ? _c('ul', {
     staticClass: "results"
   }, [_vm._l((_vm.customers), function(customer) {
     return (_vm.customers) ? _c('li', {
@@ -68835,9 +68836,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         staticClass: "address"
       }, [_vm._v(_vm._s(address.address_1) + ", " + _vm._s(address.address_2) + " " + _vm._s(address.town) + ", " + _vm._s(address.county) + ", " + _vm._s(address.postcode))])
     }))]) : _vm._e()
-  }), _vm._v(" "), (!_vm.customers) ? _c('li', [_c('span', {
+  }), _vm._v(" "), (_vm.customers.length == 0) ? _c('li', {
+    staticClass: "item"
+  }, [_c('span', {
     staticClass: "name"
-  }, [_vm._v("No results found.")])]) : _vm._e()], 2)])
+  }, [_vm._v("No results found.")])]) : _vm._e()], 2) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "input-group-addon",
