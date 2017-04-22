@@ -2,8 +2,9 @@
     <div class="search" id="customer-search-box" v-on-clickaway="clickedAway">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-            <input name="query" v-on:keyup="search" v-model="searchTerm" placeholder="Search for a customer (min. 3 characters)..." class="form-control" id="search" autocomplete="off">
+            <input name="query" v-on:keyup="search" v-model="searchTerm" placeholder="Customer search..." class="form-control" id="search" autocomplete="off">
         </div>
+        <span class="minimum-character-notice">* minimum 3 characters</span>
         <ul class="results" v-if="customers">
             <li v-if="customers" v-for="customer in customers" class="item" v-on:click="selectCustomer(customer)">
                 <span class="name">{{ customer.firstname }} {{ customer.surname }}</span>

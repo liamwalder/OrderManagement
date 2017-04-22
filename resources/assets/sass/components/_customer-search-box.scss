@@ -1,4 +1,11 @@
-#customer-search-box {
+#customer-search-box,
+#product-search-box {
+  .minimum-character-notice {
+    margin-top: 5px;
+    width: 100%;
+    text-align: right;
+    display: inline-block;
+  }
   .results {
     padding: 0;
     margin: 0;
@@ -15,7 +22,6 @@
       span {
         width: 100%;
         display: inline-block;
-        font-weight: 700;
       }
       ul {
         padding-left: 18px;
@@ -24,6 +30,14 @@
           font-size: 12px;
         }
       }
+    }
+  }
+}
+
+#product-search-box {
+  .results {
+    .item {
+      padding: 0.4% 1%;
     }
   }
 }

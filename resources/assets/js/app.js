@@ -14,6 +14,7 @@ require('./frontend');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('customer-search-box', require('./components/Shared/CustomerSearchBox.vue'));
+Vue.component('product-search-box', require('./components/Shared/ProductSearchBox.vue'));
 Vue.component('errors', require('./components/Shared/Errors.vue'));
 Vue.component('search', require('./components/Shared/Search.vue'));
 Vue.component('pagination', require('./components/Listing/Pagination.vue'));

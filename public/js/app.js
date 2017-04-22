@@ -36223,6 +36223,7 @@ __webpack_require__(177);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('customer-search-box', __webpack_require__(205));
+Vue.component('product-search-box', __webpack_require__(248));
 Vue.component('errors', __webpack_require__(206));
 Vue.component('search', __webpack_require__(207));
 Vue.component('pagination', __webpack_require__(197));
@@ -38741,6 +38742,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_clickaway__);
+//
 //
 //
 //
@@ -68814,7 +68816,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "name": "query",
-      "placeholder": "Search for a customer (min. 3 characters)...",
+      "placeholder": "Customer search...",
       "id": "search",
       "autocomplete": "off"
     },
@@ -68828,7 +68830,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.searchTerm = $event.target.value
       }
     }
-  })]), _vm._v(" "), (_vm.customers) ? _c('ul', {
+  })]), _vm._v(" "), _c('span', {
+    staticClass: "minimum-character-notice"
+  }, [_vm._v("* minimum 3 characters")]), _vm._v(" "), (_vm.customers) ? _c('ul', {
     staticClass: "results"
   }, [_vm._l((_vm.customers), function(customer) {
     return (_vm.customers) ? _c('li', {
@@ -70771,18 +70775,78 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     data: function data() {
         return {
+            products: [],
             address: [],
-            customer: null
+            customer: null,
+            totalPrice: 0
         };
     },
 
     methods: {
+        removeProduct: function removeProduct(index) {
+            this.products.splice(index, 1);
+            this.updateTotal();
+        },
+        quantityChange: function quantityChange(product) {
+            var price = product.originalPrice;
+            var quantity = product.quantity;
+            product.price = Math.round(price * quantity * 100) / 100;
+            this.updateTotal();
+        },
+        addProduct: function addProduct(product) {
+            product.quantity = 1;
+            product.originalPrice = product.price;
+            this.products.push(product);
+            this.updateTotal();
+        },
         setAddress: function setAddress(address) {
             this.address = address;
         },
@@ -70791,6 +70855,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (customer.addresses.length == 1) {
                 this.address = this.customer.addresses[0];
             }
+        },
+        updateTotal: function updateTotal() {
+            var self = this;
+            this.totalPrice = 0;
+            this.products.forEach(function (product, key) {
+                self.totalPrice += product.originalPrice * product.quantity;
+            });
+            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
         }
     }
 
@@ -70836,38 +70908,20 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "row",
-    attrs: {
-      "id": "order-creation"
-    }
+    staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12 holder"
   }, [_c('div', {
     staticClass: "col-xs-4 customer"
   }, [_c('div', {
     staticClass: "section"
-  }, [_c('customer-search-box', {
+  }, [_c('h3', [_vm._v("Customer")]), _vm._v(" "), _c('customer-search-box', {
     on: {
       "selectedCustomer": _vm.setCustomer
     }
-  }), _vm._v(" "), (_vm.customer) ? _c('div', [_c('hr'), _vm._v(" "), _c('h3', [_vm._v("Customer Details")]), _vm._v(" "), _c('ul', {
+  }), _vm._v(" "), (_vm.customer) ? _c('div', [_c('hr'), _vm._v(" "), _c('h4', [_vm._v("Customer Details")]), _vm._v(" "), _c('table', {
     staticClass: "customer-details"
-  }, [_c('li', [_c('i', {
-    staticClass: "fa fa-user",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.customer.firstname) + " " + _vm._s(_vm.customer.surname))]), _vm._v(" "), _c('li', [_c('i', {
-    staticClass: "fa fa-envelope",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.customer.email))]), _vm._v(" "), _c('li', [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" " + _vm._s(_vm.customer.phone))])]), _vm._v(" "), _c('h3', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
+  }, [_c('tr', [_vm._m(0), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.firstname) + " " + _vm._s(_vm.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.phone))])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
     staticClass: "addresses col-md-12 no-padding-left no-padding-right"
   }, _vm._l((_vm.customer.addresses), function(customerAddress) {
     return _c('div', {
@@ -70892,19 +70946,288 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("Select")]) : _vm._e()]) : _vm._e()])])])
-  }))]) : _vm._e()], 1)]), _vm._v(" "), _vm._m(0)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }))]) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-8"
   }, [_c('div', {
     staticClass: "section"
-  }, [_c('h3', [_vm._v("Products")])])])
+  }, [_c('h3', [_vm._v("Products")]), _vm._v(" "), _c('product-search-box', {
+    on: {
+      "selectedProduct": _vm.addProduct
+    }
+  }), _vm._v(" "), (_vm.products.length > 0) ? _c('div', {
+    staticClass: "entity-table"
+  }, [_c('table', {
+    staticClass: "table listing"
+  }, [_vm._m(3), _vm._v(" "), _c('tbody', [_vm._l((_vm.products), function(product, index) {
+    return _c('tr', [_c('td', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (product.id),
+        expression: "product.id"
+      }],
+      attrs: {
+        "type": "hidden",
+        "name": "id"
+      },
+      domProps: {
+        "value": (product.id)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          product.id = $event.target.value
+        }
+      }
+    }), _vm._v("\n                                    " + _vm._s(product.name) + "\n                                ")]), _vm._v(" "), _c('td', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (product.quantity),
+        expression: "product.quantity"
+      }],
+      attrs: {
+        "type": "text",
+        "name": "quantity"
+      },
+      domProps: {
+        "value": (product.quantity)
+      },
+      on: {
+        "keyup": function($event) {
+          _vm.quantityChange(product)
+        },
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          product.quantity = $event.target.value
+        }
+      }
+    })]), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(product.price))]), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-block red",
+      on: {
+        "click": function($event) {
+          _vm.removeProduct(index)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-times",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Remove")])])])
+  }), _vm._v(" "), _c('tr', {
+    staticClass: "total"
+  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.totalPrice))]), _vm._v(" "), _c('td')])], 2)])]) : _vm._e()], 1)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-phone",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")]), _vm._v(" "), _c('th')])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-5464c809", module.exports)
+  }
+}
+
+/***/ }),
+/* 247 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_clickaway__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    directives: {
+        onClickaway: __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__["directive"]
+    },
+
+    data: function data() {
+        return {
+            searchTerm: null,
+            products: null
+        };
+    },
+
+    methods: {
+        clickedAway: function clickedAway() {
+            this.searchTerm = null;
+            this.products = null;
+        },
+        search: function search() {
+            var self = this;
+            if (this.searchTerm.length > 0) {
+                var apiUrl = Routes.product.list + '&search=' + this.searchTerm;
+                axios.get(apiUrl).then(function (response) {
+                    self.products = response.data.entities.items;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                this.products = null;
+            }
+        },
+        selectProduct: function selectProduct(product) {
+            this.searchTerm = null;
+            this.products = null;
+            this.$emit('selectedProduct', product);
+        }
+    }
+
+});
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(247),
+  /* template */
+  __webpack_require__(249),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Shared/ProductSearchBox.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProductSearchBox.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-287ea68c", Component.options)
+  } else {
+    hotAPI.reload("data-v-287ea68c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    directives: [{
+      name: "on-clickaway",
+      rawName: "v-on-clickaway",
+      value: (_vm.clickedAway),
+      expression: "clickedAway"
+    }],
+    staticClass: "search",
+    attrs: {
+      "id": "product-search-box"
+    }
+  }, [_c('div', {
+    staticClass: "input-group"
+  }, [_vm._m(0), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.searchTerm),
+      expression: "searchTerm"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "query",
+      "placeholder": "Product search...",
+      "id": "search",
+      "autocomplete": "off"
+    },
+    domProps: {
+      "value": (_vm.searchTerm)
+    },
+    on: {
+      "keyup": _vm.search,
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.searchTerm = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), (_vm.products) ? _c('ul', {
+    staticClass: "results"
+  }, [_vm._l((_vm.products), function(product) {
+    return (_vm.products) ? _c('li', {
+      staticClass: "item",
+      on: {
+        "click": function($event) {
+          _vm.selectProduct(product)
+        }
+      }
+    }, [_c('span', {
+      staticClass: "name"
+    }, [_vm._v(_vm._s(product.name) + " - £" + _vm._s(product.price))])]) : _vm._e()
+  }), _vm._v(" "), (_vm.products.length == 0) ? _c('li', {
+    staticClass: "item"
+  }, [_c('span', {
+    staticClass: "name"
+  }, [_vm._v("No results found.")])]) : _vm._e()], 2) : _vm._e()])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-addon",
+    attrs: {
+      "id": "basic-addon1"
+    }
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-search"
+  })])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-287ea68c", module.exports)
   }
 }
 
