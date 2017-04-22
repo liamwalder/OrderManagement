@@ -1,15 +1,41 @@
 #order-creation {
-  .section {
-    padding: 20px;
+
+  .holder {
     background-color: white;
+    padding: 20px;
 
-    h3 {
-      margin-top: 0;
+    .customer {
+      background-color: white;
+      border-right: 1px solid #eeeeee;
+      position: relative;
+
+      .customer-details {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
     }
 
-    .search {
-      margin-right: 0;
+    .results {
+      position: absolute;
+      width: 100%;
     }
 
+    .section {
+      padding: 20px;
+
+      h3 {
+        margin-top: 0;
+      }
+
+      .search {
+        margin-right: 0;
+      }
+
+    }
   }
+
 }
