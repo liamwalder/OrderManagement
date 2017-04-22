@@ -13,7 +13,7 @@ class AddressSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('en_GB');
         for ($i = 0; $i < 13; $i++) {
 
             $customerId = ($i + 1);

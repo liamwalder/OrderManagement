@@ -14,7 +14,7 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('en_GB');
         for ($i = 0; $i < 10; $i++) {
             $customer = [
                 'firstname' => $faker->firstName,
