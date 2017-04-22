@@ -2,10 +2,10 @@
     <div class="search" id="customer-search-box" v-on-clickaway="clickedAway">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-            <input name="query" v-on:keyup="search" v-model="searchTerm" placeholder="Search (min. 3 characters)..." class="form-control" id="search" autocomplete="off">
+            <input name="query" v-on:keyup="search" v-model="searchTerm" placeholder="Search for a customer (min. 3 characters)..." class="form-control" id="search" autocomplete="off">
         </div>
         <ul class="results" v-if="customers">
-            <li v-if="customers" v-for="customer in customers" class="item" v-on:click="setCustomer(customer)">
+            <li v-if="customers" v-for="customer in customers" class="item" v-on:click="selectCustomer(customer)">
                 <span class="name">{{ customer.firstname }} {{ customer.surname }}</span>
                 <ul>
                     <li class="address" v-for="address in customer.addresses">{{ address.address_1 }}, {{ address.address_2 }} {{ address.town }}, {{ address.county }}, {{ address.postcode }}</li>
@@ -48,7 +48,6 @@
                     let apiUrl = Routes.customer.list + '?search=' + this.searchTerm;
                     axios.get(apiUrl)
                     .then(function (response) {
-                        let customers = response.data.entities.items;
                         self.customers = response.data.entities.items;
                     })
                     .catch(function (error) {
@@ -57,6 +56,12 @@
                 } else {
                     this.customers = null;
                 }
+            },
+
+            selectCustomer(customer) {
+                this.searchTerm = null;
+                this.customers = null;
+                this.$emit('selectedCustomer', customer);
             }
         }
 

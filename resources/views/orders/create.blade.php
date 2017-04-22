@@ -7,25 +7,6 @@
         </div>
     </div>
 
-
-    <div class="row" id="order-creation">
-        <div class="col-xs-12">
-
-            <div class="col-xs-4">
-                <div class="section">
-                    <h3>Customer</h3>
-                    <customer-search-box></customer-search-box>
-                    <hr>
-                </div>
-            </div>
-
-            <div class="col-xs-8">
-                <div class="section">
-                    <h3>Order</h3>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    <create-order></create-order>
 
 @endsection

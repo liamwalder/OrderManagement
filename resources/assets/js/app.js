@@ -20,7 +20,10 @@ Vue.component('pagination', require('./components/Listing/Pagination.vue'));
 Vue.component('statistic-panel', require('./components/Dashboard/StatisticPanel.vue'));
 Vue.component('order-statistic-widget', require('./components/Dashboard/OrderStatisticWidget.vue'));
 
-
+/**
+ * Create order
+ */
+Vue.component('create-order', require('./components/Orders/Create/Screen.vue'));
 
 /**
  * Orders
