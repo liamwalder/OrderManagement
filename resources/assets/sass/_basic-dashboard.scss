@@ -146,8 +146,8 @@ body {
   }
 }
 
-.sidebar ul li.active > a {
-  background-color: #eee;
+.sidebar ul li.active {
+  background-color: darken($background, 5%) !important;
 }
 
 .sidebar .arrow {
@@ -177,7 +177,7 @@ body {
 
 .navbar-default.sidebar {
   background-color: $background !important;
-  
+
   li {
     a {
       &:hover,
@@ -188,7 +188,7 @@ body {
     }
 
   }
-  
+
 }
 
 @media(min-width:768px) {
