@@ -113,14 +113,28 @@
             quantityChange(product) {
                 let price = product.originalPrice;
                 let quantity = product.quantity;
-                product.price = Math.round((price * quantity) * 100) / 100;
+                product.price = (Math.round((price * quantity) * 100) / 100).toFixed(2);
                 this.updateTotal();
             },
 
             addProduct(product) {
-                product.quantity = 1;
-                product.originalPrice = product.price;
-                this.products.push(product);
+                let self = this;
+                let productAlreadyInList = false;
+
+                this.products.forEach(function(existingProduct, key) {
+                   if (existingProduct.id == product.id) {
+                       existingProduct.quantity++;
+                       self.quantityChange(existingProduct);
+                       productAlreadyInList = true;
+                   }
+                });
+
+                if (productAlreadyInList === false) {
+                    product.quantity = 1;
+                    product.originalPrice = product.price;
+                    this.products.push(product);
+                }
+
                 this.updateTotal();
             },
 
@@ -142,6 +156,7 @@
                     self.totalPrice += (product.originalPrice * product.quantity);
                 });
                 this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+                this.totalPrice = this.totalPrice.toFixed(2);
             }
 
         }
