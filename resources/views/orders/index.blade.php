@@ -10,7 +10,7 @@
                 </form>
                 <a class="btn green" href="{{ route('orders.create') }}">
                     <i class="glyphicon glyphicon-plus"></i>
-                    Create a order
+                    Create an order
                 </a>
             </div>
         </div>

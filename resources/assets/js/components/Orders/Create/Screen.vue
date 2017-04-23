@@ -4,9 +4,8 @@
         <div class="col-xs-12 holder">
 
             <div class="actions col-md-12 no-padding-right">
-                <button class="btn green create-order" v-on:click="placeOrder()">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    Place Order
+                <button class="btn btn-md green create-order" v-on:click="placeOrder()">
+                    Save Order
                 </button>
             </div>
 
@@ -194,7 +193,7 @@
 
                 axios.post(Routes.order.create, submission)
                 .then(function (response) {
-
+                    window.location = "/orders";
                 })
                 .catch(function (error) {
                     self.errors = error.response.data;

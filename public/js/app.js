@@ -38531,7 +38531,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38614,7 +38613,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 submission.order.customer_id = this.customer.id;
             }
 
-            axios.post(Routes.order.create, submission).then(function (response) {}).catch(function (error) {
+            axios.post(Routes.order.create, submission).then(function (response) {
+                window.location = "/orders";
+            }).catch(function (error) {
                 self.errors = error.response.data;
             });
         }
@@ -69794,15 +69795,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "actions col-md-12 no-padding-right"
   }, [_c('button', {
-    staticClass: "btn green create-order",
+    staticClass: "btn btn-md green create-order",
     on: {
       "click": function($event) {
         _vm.placeOrder()
       }
     }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-plus"
-  }), _vm._v("\n                Place Order\n            ")])]), _vm._v(" "), _c('hr', {
+  }, [_vm._v("\n                Save Order\n            ")])]), _vm._v(" "), _c('hr', {
     staticClass: "col-md-12"
   }), _vm._v(" "), _c('errors', {
     attrs: {
