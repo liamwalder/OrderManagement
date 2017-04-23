@@ -76,8 +76,17 @@ class OrderService extends Service
      */
     public function create(array $data)
     {
+        // Placed
+        $data['status_id'] = 1;
         $order = $this->orderRepository->create($data);
+
+        $products = $data['products'];
+        foreach ($products as $product) {
+            $order->products()->attach($product);
+        }
+
         $order = $this->orderTransformer->transformItem($order);
+
         return $order;
     }
 

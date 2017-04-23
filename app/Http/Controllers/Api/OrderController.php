@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Http\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class OrderController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(Request $request)
+    public function create(OrderRequest $request)
     {
         $order = $this->orderService->create($request->get('order'));
         return response()->json($order, 201);

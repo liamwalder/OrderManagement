@@ -37304,7 +37304,6 @@ module.exports = function spread(callback) {
                 var modal = $('#createAddressModal');
                 modal.modal('hide');
             }).catch(function (error) {
-                console.log(error);
                 self.errors = error.response.data;
                 button.button('reset');
             });
@@ -38520,6 +38519,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38529,7 +38541,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             products: [],
             address: [],
             customer: null,
-            totalPrice: 0
+            totalPrice: 0,
+            errors: []
         };
     },
 
@@ -38581,6 +38594,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.totalPrice = Math.round(this.totalPrice * 100) / 100;
             this.totalPrice = this.totalPrice.toFixed(2);
+        },
+        placeOrder: function placeOrder() {
+            var self = this;
+
+            var products = [];
+            this.products.forEach(function (product, key) {
+                products.push(product.id);
+            });
+
+            var submission = {
+                order: {
+                    address_id: this.address.id,
+                    products: products
+                }
+            };
+
+            if (this.customer !== null) {
+                submission.order.customer_id = this.customer.id;
+            }
+
+            axios.post(Routes.order.create, submission).then(function (response) {}).catch(function (error) {
+                self.errors = error.response.data;
+            });
         }
     }
 
@@ -39226,7 +39262,8 @@ window.axios.defaults.headers.common = {
 window.Routes = {
 
     order: {
-        list: '/api/orders'
+        list: '/api/orders',
+        create: '/api/orders'
     },
 
     product: {
@@ -69755,7 +69792,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-xs-12 holder"
   }, [_c('div', {
-    staticClass: "col-xs-4 customer"
+    staticClass: "actions col-md-12 no-padding-right"
+  }, [_c('button', {
+    staticClass: "btn green create-order",
+    on: {
+      "click": function($event) {
+        _vm.placeOrder()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-plus"
+  }), _vm._v("\n                Place Order\n            ")])]), _vm._v(" "), _c('hr', {
+    staticClass: "col-md-12"
+  }), _vm._v(" "), _c('errors', {
+    attrs: {
+      "errors": _vm.errors
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-4 customer no-padding-left"
   }, [_c('div', {
     staticClass: "section"
   }, [_c('h3', [_vm._v("Customer")]), _vm._v(" "), _c('customer-search-box', {
@@ -69790,7 +69844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v("Select")]) : _vm._e()]) : _vm._e()])])])
   }))]) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-8"
+    staticClass: "col-xs-8 no-padding-right"
   }, [_c('div', {
     staticClass: "section"
   }, [_c('h3', [_vm._v("Products")]), _vm._v(" "), _c('product-search-box', {
@@ -69860,7 +69914,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" Remove")])])])
   }), _vm._v(" "), _c('tr', {
     staticClass: "total"
-  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.totalPrice))]), _vm._v(" "), _c('td')])], 2)])]) : _vm._e()], 1)])])])
+  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.totalPrice))]), _vm._v(" "), _c('td')])], 2)])]) : _vm._e()], 1)])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('td', [_c('i', {
     staticClass: "fa fa-user",

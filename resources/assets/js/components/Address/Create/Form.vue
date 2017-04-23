@@ -82,7 +82,6 @@
                     modal.modal('hide');
                 })
                 .catch(function (error) {
-                    console.log(error);
                     self.errors = error.response.data;
                     button.button('reset');
                 });

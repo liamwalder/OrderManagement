@@ -36,7 +36,8 @@ window.axios.defaults.headers.common = {
 window.Routes = {
 
     order: {
-        list: '/api/orders'
+        list: '/api/orders',
+        create: '/api/orders'
     },
 
     product: {

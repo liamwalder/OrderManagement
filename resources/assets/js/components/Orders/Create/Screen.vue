@@ -1,8 +1,20 @@
 <template>
     <div class="row">
+
         <div class="col-xs-12 holder">
 
-            <div class="col-xs-4 customer">
+            <div class="actions col-md-12 no-padding-right">
+                <button class="btn green create-order" v-on:click="placeOrder()">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Place Order
+                </button>
+            </div>
+
+            <hr class="col-md-12">
+
+            <errors :errors="errors"></errors>
+
+            <div class="col-xs-4 customer no-padding-left">
                 <div class="section">
                     <h3>Customer</h3>
                     <customer-search-box v-on:selectedCustomer="setCustomer"></customer-search-box>
@@ -47,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-8">
+            <div class="col-xs-8 no-padding-right">
                 <div class="section">
                     <h3>Products</h3>
                     <product-search-box v-on:selectedProduct="addProduct"></product-search-box>
@@ -83,6 +95,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
 
@@ -99,7 +112,8 @@
                 products: [],
                 address: [],
                 customer: null,
-                totalPrice: 0
+                totalPrice: 0,
+                errors: []
             }
         },
 
@@ -157,6 +171,35 @@
                 });
                 this.totalPrice = Math.round(this.totalPrice * 100) / 100;
                 this.totalPrice = this.totalPrice.toFixed(2);
+            },
+
+            placeOrder() {
+                let self = this;
+
+                let products = [];
+                this.products.forEach(function(product, key) {
+                   products.push(product.id);
+                });
+
+                let submission = {
+                    order: {
+                        address_id: this.address.id,
+                        products: products
+                    }
+                };
+
+                if (this.customer !== null) {
+                    submission.order.customer_id = this.customer.id;
+                }
+
+                axios.post(Routes.order.create, submission)
+                .then(function (response) {
+
+                })
+                .catch(function (error) {
+                    self.errors = error.response.data;
+                });
+
             }
 
         }
