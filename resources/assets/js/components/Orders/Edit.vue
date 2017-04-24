@@ -43,7 +43,7 @@
 
                 axios.post(Routes.order.edit.replace('{id}', this.id), submission)
                 .then(function (response) {
-//                    window.location = "/orders";
+                    window.location = "/orders";
                 })
                 .catch(function (error) {
                     self.errors = error.response.data;
