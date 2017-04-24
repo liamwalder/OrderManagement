@@ -57,7 +57,7 @@
             },
 
             edit(entry) {
-                console.log('edit');
+                window.location = '/orders/edit/' + entry.id;
             }
 
         }

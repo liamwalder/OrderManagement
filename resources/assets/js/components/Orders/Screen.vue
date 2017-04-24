@@ -104,7 +104,7 @@
 
 <script>
 
-    export default {
+    module.exports =  {
 
         data: function() {
             return {
@@ -126,6 +126,8 @@
             quantityChange(product) {
                 let price = product.originalPrice;
                 let quantity = product.quantity;
+                console.log(price);
+                console.log(quantity);
                 product.price = (Math.round((price * quantity) * 100) / 100).toFixed(2);
                 this.updateTotal();
             },
@@ -173,11 +175,12 @@
             },
 
             placeOrder() {
-                let self = this;
-
                 let products = [];
-                this.products.forEach(function(product, key) {
-                   products.push(product.id);
+                this.products.forEach(function (product, key) {
+                    products.push({
+                        id: product.id,
+                        quantity: product.quantity
+                    });
                 });
 
                 let submission = {
@@ -191,6 +194,12 @@
                     submission.order.customer_id = this.customer.id;
                 }
 
+                this.sendOrderRequest(submission);
+            },
+
+            sendOrderRequest(submission) {
+                let self = this;
+
                 axios.post(Routes.order.create, submission)
                 .then(function (response) {
                     window.location = "/orders";
@@ -198,7 +207,6 @@
                 .catch(function (error) {
                     self.errors = error.response.data;
                 });
-
             }
 
         }

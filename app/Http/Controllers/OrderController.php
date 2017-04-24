@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Repositories\OrderRepository;
 
 /**
  * Class OrderController
@@ -8,6 +9,7 @@ namespace App\Http\Controllers;
  */
 class OrderController extends Controller
 {
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -22,6 +24,15 @@ class OrderController extends Controller
     public function create()
     {
         return view('orders.create');
+    }
+
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id) {
+        return view('orders.edit', ['id' => $id]);
     }
 
 }

@@ -36317,7 +36317,8 @@ Vue.component('order-statistic-widget', __webpack_require__(197));
 /**
  * Create order
  */
-Vue.component('create-order', __webpack_require__(200));
+Vue.component('create-order-screen', __webpack_require__(248));
+Vue.component('edit-order-screen', __webpack_require__(253));
 
 /**
  * Orders
@@ -38422,208 +38423,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 167 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    data: function data() {
-        return {
-            products: [],
-            address: [],
-            customer: null,
-            totalPrice: 0,
-            errors: []
-        };
-    },
-
-    methods: {
-        removeProduct: function removeProduct(index) {
-            this.products.splice(index, 1);
-            this.updateTotal();
-        },
-        quantityChange: function quantityChange(product) {
-            var price = product.originalPrice;
-            var quantity = product.quantity;
-            product.price = (Math.round(price * quantity * 100) / 100).toFixed(2);
-            this.updateTotal();
-        },
-        addProduct: function addProduct(product) {
-            var self = this;
-            var productAlreadyInList = false;
-
-            this.products.forEach(function (existingProduct, key) {
-                if (existingProduct.id == product.id) {
-                    existingProduct.quantity++;
-                    self.quantityChange(existingProduct);
-                    productAlreadyInList = true;
-                }
-            });
-
-            if (productAlreadyInList === false) {
-                product.quantity = 1;
-                product.originalPrice = product.price;
-                this.products.push(product);
-            }
-
-            this.updateTotal();
-        },
-        setAddress: function setAddress(address) {
-            this.address = address;
-        },
-        setCustomer: function setCustomer(customer) {
-            this.customer = customer;
-            if (customer.addresses.length == 1) {
-                this.address = this.customer.addresses[0];
-            }
-        },
-        updateTotal: function updateTotal() {
-            var self = this;
-            this.totalPrice = 0;
-            this.products.forEach(function (product, key) {
-                self.totalPrice += product.originalPrice * product.quantity;
-            });
-            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
-            this.totalPrice = this.totalPrice.toFixed(2);
-        },
-        placeOrder: function placeOrder() {
-            var self = this;
-
-            var products = [];
-            this.products.forEach(function (product, key) {
-                products.push(product.id);
-            });
-
-            var submission = {
-                order: {
-                    address_id: this.address.id,
-                    products: products
-                }
-            };
-
-            if (this.customer !== null) {
-                submission.order.customer_id = this.customer.id;
-            }
-
-            axios.post(Routes.order.create, submission).then(function (response) {
-                window.location = "/orders";
-            }).catch(function (error) {
-                self.errors = error.response.data;
-            });
-        }
-    }
-
-});
-
-/***/ }),
+/* 167 */,
 /* 168 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38681,7 +38481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log('remove');
         },
         edit: function edit(entry) {
-            console.log('edit');
+            window.location = '/orders/edit/' + entry.id;
         }
     }
 
@@ -39264,7 +39064,9 @@ window.Routes = {
 
     order: {
         list: '/api/orders',
-        create: '/api/orders'
+        create: '/api/orders',
+        single: '/api/order/{id}',
+        edit: '/api/order/{id}'
     },
 
     product: {
@@ -68493,40 +68295,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(167),
-  /* template */
-  __webpack_require__(222),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Orders/Create/Screen.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Screen.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5464c809", Component.options)
-  } else {
-    hotAPI.reload("data-v-5464c809", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 200 */,
 /* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -69784,169 +69553,7 @@ if (false) {
 }
 
 /***/ }),
-/* 222 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 holder"
-  }, [_c('div', {
-    staticClass: "actions col-md-12 no-padding-right"
-  }, [_c('button', {
-    staticClass: "btn btn-md green create-order",
-    on: {
-      "click": function($event) {
-        _vm.placeOrder()
-      }
-    }
-  }, [_vm._v("\n                Save Order\n            ")])]), _vm._v(" "), _c('hr', {
-    staticClass: "col-md-12"
-  }), _vm._v(" "), _c('errors', {
-    attrs: {
-      "errors": _vm.errors
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-4 customer no-padding-left"
-  }, [_c('div', {
-    staticClass: "section"
-  }, [_c('h3', [_vm._v("Customer")]), _vm._v(" "), _c('customer-search-box', {
-    on: {
-      "selectedCustomer": _vm.setCustomer
-    }
-  }), _vm._v(" "), (_vm.customer) ? _c('div', [_c('hr'), _vm._v(" "), _c('h4', [_vm._v("Customer Details")]), _vm._v(" "), _c('table', {
-    staticClass: "customer-details"
-  }, [_c('tr', [_vm._m(0), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.firstname) + " " + _vm._s(_vm.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.phone))])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
-    staticClass: "addresses col-md-12 no-padding-left no-padding-right"
-  }, _vm._l((_vm.customer.addresses), function(customerAddress) {
-    return _c('div', {
-      staticClass: "address col-md-6",
-      class: {
-        selected: customerAddress.id == _vm.address.id
-      }
-    }, [_c('div', {
-      staticClass: "contents"
-    }, [_c('div', {
-      staticClass: "breakdown"
-    }, [_c('span', [_vm._v(_vm._s(customerAddress.address_1))]), _vm._v(" "), (customerAddress.address_2) ? _c('span', [_vm._v(_vm._s(customerAddress.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.postcode))]), _vm._v(" "), (_vm.customer.addresses.length > 1) ? _c('div', {
-      staticClass: "actions"
-    }, [(customerAddress.id != _vm.address.id) ? _c('button', {
-      staticClass: "btn green",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": function($event) {
-          _vm.setAddress(customerAddress)
-        }
-      }
-    }, [_vm._v("Select")]) : _vm._e()]) : _vm._e()])])])
-  }))]) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-8 no-padding-right"
-  }, [_c('div', {
-    staticClass: "section"
-  }, [_c('h3', [_vm._v("Products")]), _vm._v(" "), _c('product-search-box', {
-    on: {
-      "selectedProduct": _vm.addProduct
-    }
-  }), _vm._v(" "), (_vm.products.length > 0) ? _c('div', {
-    staticClass: "entity-table"
-  }, [_c('table', {
-    staticClass: "table listing"
-  }, [_vm._m(3), _vm._v(" "), _c('tbody', [_vm._l((_vm.products), function(product, index) {
-    return _c('tr', [_c('td', [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (product.id),
-        expression: "product.id"
-      }],
-      attrs: {
-        "type": "hidden",
-        "name": "id"
-      },
-      domProps: {
-        "value": (product.id)
-      },
-      on: {
-        "input": function($event) {
-          if ($event.target.composing) { return; }
-          product.id = $event.target.value
-        }
-      }
-    }), _vm._v("\n                                    " + _vm._s(product.name) + "\n                                ")]), _vm._v(" "), _c('td', [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (product.quantity),
-        expression: "product.quantity"
-      }],
-      attrs: {
-        "type": "text",
-        "name": "quantity"
-      },
-      domProps: {
-        "value": (product.quantity)
-      },
-      on: {
-        "keyup": function($event) {
-          _vm.quantityChange(product)
-        },
-        "input": function($event) {
-          if ($event.target.composing) { return; }
-          product.quantity = $event.target.value
-        }
-      }
-    })]), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(product.price))]), _vm._v(" "), _c('td', [_c('button', {
-      staticClass: "btn btn-block red",
-      on: {
-        "click": function($event) {
-          _vm.removeProduct(index)
-        }
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-times",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    }), _vm._v(" Remove")])])])
-  }), _vm._v(" "), _c('tr', {
-    staticClass: "total"
-  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.totalPrice))]), _vm._v(" "), _c('td')])], 2)])]) : _vm._e()], 1)])], 1)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('i', {
-    staticClass: "fa fa-user",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('i', {
-    staticClass: "fa fa-envelope",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")]), _vm._v(" "), _c('th')])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5464c809", module.exports)
-  }
-}
-
-/***/ }),
+/* 222 */,
 /* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71287,6 +70894,556 @@ module.exports = function listToStyles (parentId, list) {
 
 __webpack_require__(132);
 module.exports = __webpack_require__(133);
+
+
+/***/ }),
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Screen_vue__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Screen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Screen_vue__);
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__Screen_vue___default.a]
+});
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(247),
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Orders/Create.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-486ce43c", Component.options)
+  } else {
+    hotAPI.reload("data-v-486ce43c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+module.exports = {
+
+    data: function data() {
+        return {
+            products: [],
+            address: [],
+            customer: null,
+            totalPrice: 0,
+            errors: []
+        };
+    },
+
+    methods: {
+        removeProduct: function removeProduct(index) {
+            this.products.splice(index, 1);
+            this.updateTotal();
+        },
+        quantityChange: function quantityChange(product) {
+            var price = product.originalPrice;
+            var quantity = product.quantity;
+            console.log(price);
+            console.log(quantity);
+            product.price = (Math.round(price * quantity * 100) / 100).toFixed(2);
+            this.updateTotal();
+        },
+        addProduct: function addProduct(product) {
+            var self = this;
+            var productAlreadyInList = false;
+
+            this.products.forEach(function (existingProduct, key) {
+                if (existingProduct.id == product.id) {
+                    existingProduct.quantity++;
+                    self.quantityChange(existingProduct);
+                    productAlreadyInList = true;
+                }
+            });
+
+            if (productAlreadyInList === false) {
+                product.quantity = 1;
+                product.originalPrice = product.price;
+                this.products.push(product);
+            }
+
+            this.updateTotal();
+        },
+        setAddress: function setAddress(address) {
+            this.address = address;
+        },
+        setCustomer: function setCustomer(customer) {
+            this.customer = customer;
+            if (customer.addresses.length == 1) {
+                this.address = this.customer.addresses[0];
+            }
+        },
+        updateTotal: function updateTotal() {
+            var self = this;
+            this.totalPrice = 0;
+            this.products.forEach(function (product, key) {
+                self.totalPrice += product.originalPrice * product.quantity;
+            });
+            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+            this.totalPrice = this.totalPrice.toFixed(2);
+        },
+        placeOrder: function placeOrder() {
+            var products = [];
+            this.products.forEach(function (product, key) {
+                products.push({
+                    id: product.id,
+                    quantity: product.quantity
+                });
+            });
+
+            var submission = {
+                order: {
+                    address_id: this.address.id,
+                    products: products
+                }
+            };
+
+            if (this.customer !== null) {
+                submission.order.customer_id = this.customer.id;
+            }
+
+            this.sendOrderRequest(submission);
+        },
+        sendOrderRequest: function sendOrderRequest(submission) {
+            var self = this;
+
+            axios.post(Routes.order.create, submission).then(function (response) {
+                window.location = "/orders";
+            }).catch(function (error) {
+                self.errors = error.response.data;
+            });
+        }
+    }
+
+};
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(249),
+  /* template */
+  __webpack_require__(251),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Orders/Screen.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Screen.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-714c7552", Component.options)
+  } else {
+    hotAPI.reload("data-v-714c7552", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 holder"
+  }, [_c('div', {
+    staticClass: "actions col-md-12 no-padding-right"
+  }, [_c('button', {
+    staticClass: "btn btn-md green create-order",
+    on: {
+      "click": function($event) {
+        _vm.placeOrder()
+      }
+    }
+  }, [_vm._v("\n                Save Order\n            ")])]), _vm._v(" "), _c('hr', {
+    staticClass: "col-md-12"
+  }), _vm._v(" "), _c('errors', {
+    attrs: {
+      "errors": _vm.errors
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-4 customer no-padding-left"
+  }, [_c('div', {
+    staticClass: "section"
+  }, [_c('h3', [_vm._v("Customer")]), _vm._v(" "), _c('customer-search-box', {
+    on: {
+      "selectedCustomer": _vm.setCustomer
+    }
+  }), _vm._v(" "), (_vm.customer) ? _c('div', [_c('hr'), _vm._v(" "), _c('h4', [_vm._v("Customer Details")]), _vm._v(" "), _c('table', {
+    staticClass: "customer-details"
+  }, [_c('tr', [_vm._m(0), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.firstname) + " " + _vm._s(_vm.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.customer.phone))])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
+    staticClass: "addresses col-md-12 no-padding-left no-padding-right"
+  }, _vm._l((_vm.customer.addresses), function(customerAddress) {
+    return _c('div', {
+      staticClass: "address col-md-6",
+      class: {
+        selected: customerAddress.id == _vm.address.id
+      }
+    }, [_c('div', {
+      staticClass: "contents"
+    }, [_c('div', {
+      staticClass: "breakdown"
+    }, [_c('span', [_vm._v(_vm._s(customerAddress.address_1))]), _vm._v(" "), (customerAddress.address_2) ? _c('span', [_vm._v(_vm._s(customerAddress.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(customerAddress.postcode))]), _vm._v(" "), (_vm.customer.addresses.length > 1) ? _c('div', {
+      staticClass: "actions"
+    }, [(customerAddress.id != _vm.address.id) ? _c('button', {
+      staticClass: "btn green",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function($event) {
+          _vm.setAddress(customerAddress)
+        }
+      }
+    }, [_vm._v("Select")]) : _vm._e()]) : _vm._e()])])])
+  }))]) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-8 no-padding-right"
+  }, [_c('div', {
+    staticClass: "section"
+  }, [_c('h3', [_vm._v("Products")]), _vm._v(" "), _c('product-search-box', {
+    on: {
+      "selectedProduct": _vm.addProduct
+    }
+  }), _vm._v(" "), (_vm.products.length > 0) ? _c('div', {
+    staticClass: "entity-table"
+  }, [_c('table', {
+    staticClass: "table listing"
+  }, [_vm._m(3), _vm._v(" "), _c('tbody', [_vm._l((_vm.products), function(product, index) {
+    return _c('tr', [_c('td', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (product.id),
+        expression: "product.id"
+      }],
+      attrs: {
+        "type": "hidden",
+        "name": "id"
+      },
+      domProps: {
+        "value": (product.id)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          product.id = $event.target.value
+        }
+      }
+    }), _vm._v("\n                                    " + _vm._s(product.name) + "\n                                ")]), _vm._v(" "), _c('td', [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (product.quantity),
+        expression: "product.quantity"
+      }],
+      attrs: {
+        "type": "text",
+        "name": "quantity"
+      },
+      domProps: {
+        "value": (product.quantity)
+      },
+      on: {
+        "keyup": function($event) {
+          _vm.quantityChange(product)
+        },
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          product.quantity = $event.target.value
+        }
+      }
+    })]), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(product.price))]), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-block red",
+      on: {
+        "click": function($event) {
+          _vm.removeProduct(index)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-times",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v(" Remove")])])])
+  }), _vm._v(" "), _c('tr', {
+    staticClass: "total"
+  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.totalPrice))]), _vm._v(" "), _c('td')])], 2)])]) : _vm._e()], 1)])], 1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "fa fa-phone",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")]), _vm._v(" "), _c('th')])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-714c7552", module.exports)
+  }
+}
+
+/***/ }),
+/* 252 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Screen_vue__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Screen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Screen_vue__);
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+        id: null
+    },
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__Screen_vue___default.a],
+
+    data: function data() {
+        return {
+            products: [],
+            address: [],
+            customer: null,
+            totalPrice: null
+        };
+    },
+
+    mounted: function mounted() {
+        var self = this;
+        axios.get(Routes.order.single.replace('{id}', this.id)).then(function (response) {
+            self.products = response.data.products;
+            self.customer = response.data.customer;
+            self.address = response.data.address;
+            self.totalPrice = response.data.value;
+            this.updateTotal();
+        }).catch(function (error) {});
+    },
+
+    methods: {
+        sendOrderRequest: function sendOrderRequest(submission) {
+            var self = this;
+
+            submission._method = 'PATCH';
+
+            axios.post(Routes.order.edit.replace('{id}', this.id), submission).then(function (response) {
+                //                    window.location = "/orders";
+            }).catch(function (error) {
+                self.errors = error.response.data;
+            });
+        }
+    }
+
+});
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(252),
+  /* template */
+  null,
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Orders/Edit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-534fdf70", Component.options)
+  } else {
+    hotAPI.reload("data-v-534fdf70", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
 
 
 /***/ })

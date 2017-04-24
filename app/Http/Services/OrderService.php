@@ -78,13 +78,9 @@ class OrderService extends Service
     {
         // Placed
         $data['status_id'] = 1;
+
         $order = $this->orderRepository->create($data);
-
-        $products = $data['products'];
-        foreach ($products as $product) {
-            $order->products()->attach($product);
-        }
-
+        $order->products()->attach($this->manageOrderProducts($data['products']));
         $order = $this->orderTransformer->transformItem($order);
 
         return $order;
@@ -100,6 +96,8 @@ class OrderService extends Service
     public function update($id, array $data)
     {
         $order = $this->orderRepository->update($id, $data);
+        $order->products()->detach();
+        $order->products()->attach($this->manageOrderProducts($data['products']));
         $order = $this->orderTransformer->transformItem($order);
         return $order;
     }
@@ -113,5 +111,23 @@ class OrderService extends Service
         $this->orderRepository->delete($id);
     }
 
+
+    /**
+     * @param $orderProducts
+     * @return mixed
+     */
+    protected function manageOrderProducts($orderProducts)
+    {
+        $products = [];
+        foreach ($orderProducts as $product) {
+            $productId = $product['id'];
+            $quantity = $product['quantity'];
+            for ($i = 0; $i < $quantity; $i++) {
+                $products[] = $productId;
+            }
+        }
+
+        return $products;
+    }
 
 }

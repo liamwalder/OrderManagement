@@ -24,7 +24,8 @@ Vue.component('order-statistic-widget', require('./components/Dashboard/OrderSta
 /**
  * Create order
  */
-Vue.component('create-order', require('./components/Orders/Create/Screen.vue'));
+Vue.component('create-order-screen', require('./components/Orders/Create.vue'));
+Vue.component('edit-order-screen', require('./components/Orders/Edit.vue'));
 
 /**
  * Orders

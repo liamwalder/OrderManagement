@@ -47,6 +47,9 @@ class OrderTransformer
      */
     public function transformItem(Order $order)
     {
+
+
+
         return [
             'id' => (int) $order->id,
             'status' => $order->status->name,
@@ -54,7 +57,7 @@ class OrderTransformer
             'created_at' => $order->created_at->format('d/m/Y H:i:s'),
             'customer' => $this->customerTransformer->transformItem($order->customer),
             'address' => $this->addressTransformer->transformItem($order->address),
-            'products' => $this->productTransformer->transformCollection($order->products)
+            'products' => $this->groupProducts($this->productTransformer->transformCollection($order->products))
         ];
     }
 
@@ -69,6 +72,31 @@ class OrderTransformer
             $collection[] = $this->transformItem($order);
         }
         return $collection;
+    }
+
+    /**
+     * @param $products
+     * @return array
+     */
+    protected function groupProducts($products)
+    {
+        $sortedProducts = [];
+        foreach($products as $key => $item) {
+            $sortedProducts[$item['id']][$key] = $item;
+        }
+        ksort($sortedProducts, SORT_NUMERIC);
+
+        $products = [];
+        foreach ($sortedProducts as $sorted) {
+            $product = end($sorted);
+            $quantity = count($sorted);
+            $product['quantity'] = $quantity;
+            $product['originalPrice'] = number_format($product['price'], 2, '.', '');
+            $product['price'] = number_format(($product['originalPrice'] * $quantity), 2, '.', '');
+            $products[] = $product;
+        }
+
+        return $products;
     }
 
 }
