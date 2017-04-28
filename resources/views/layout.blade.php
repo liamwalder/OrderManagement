@@ -29,16 +29,16 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav in" id="side-menu">
-                        <li {{ Request::is('/dashboard*') ? 'class=active' : null }}>
+                        <li {{ Request::is('/') ? 'class=active' : null }}>
                             <a href="{{ route('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
                         </li>
                         <li {{ Request::is('orders*') ? ' class=active' : null }}>
                             <a href="{{ route('orders.index') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Orders</a>
                         </li>
-                        <li{{ Request::is('/products*') ? ' class=active' : null }}>
+                        <li{{ Request::is('products*') ? ' class=active' : null }}>
                             <a href="{{ route('products.index') }}"><i class="fa fa-archive" aria-hidden="true"></i> Products</a>
                         </li>
-                        <li{{ Request::is('/customers*') ? ' class=active' : null }}>
+                        <li{{ Request::is('customers*') ? ' class=active' : null }}>
                             <a href="{{ route('customers.index') }}"><i class="fa fa-users" aria-hidden="true"></i> Customers</a>
                         </li>
                     </ul>

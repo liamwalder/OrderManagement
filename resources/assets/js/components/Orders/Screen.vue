@@ -5,6 +5,7 @@
 
             <div class="actions col-md-12 no-padding-right">
                 <button class="btn btn-md green create-order" v-on:click="placeOrder()">
+                    <i class="glyphicon glyphicon-ok-sign"></i>
                     Save Order
                 </button>
             </div>

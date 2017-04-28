@@ -14,11 +14,16 @@ class OrderStatusSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = ['Placed', 'Delivered', 'Processed', 'Completed'];
+        $statuses = [
+            ['name' => 'Placed'],
+            ['name' => 'Processed'],
+            ['name' => 'Delivered'],
+            ['name' => 'Completed']
+        ];
 
         foreach ($statuses as $status) {
             $newStatus = new \App\OrderStatus();
-            $newStatus->name = $status;
+            $newStatus->name = $status['name'];
             $newStatus->save();
         }
     }

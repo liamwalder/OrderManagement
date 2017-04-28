@@ -1,0 +1,60 @@
+#order-single {
+
+  .customer {
+    border-right: none;
+  }
+
+  .holder {
+    background-color: white;
+    padding: 20px;
+
+    .order {
+      border-right: 1px solid #eeeeee;
+
+      .order-progress {
+        margin-bottom: 40px;
+
+        .stage {
+          text-transform: uppercase;
+          font-weight: 700;
+          text-align: center;
+          font-size: 18px;
+
+          .date {
+            color: #ddd;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .status {
+            margin-bottom: -5px;
+          }
+
+          .icon {
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 104px;
+            height: 104px;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            
+            &.active {
+              background-color: $green;
+            }
+
+            i {
+              font-size: 38px;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

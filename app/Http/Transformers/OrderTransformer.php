@@ -53,6 +53,7 @@ class OrderTransformer
         return [
             'id' => (int) $order->id,
             'status' => $order->status->name,
+            'stage' => $order->status->id,
             'value' => number_format($order->products->sum('price'), 2),
             'created_at' => $order->created_at->format('d/m/Y H:i:s'),
             'customer' => $this->customerTransformer->transformItem($order->customer),

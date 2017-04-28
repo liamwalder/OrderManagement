@@ -1,6 +1,48 @@
+<template>
+    <div class="entity-table">
+        <div class="row">
+
+            <pagination
+                    :pagination="pagination"
+                    v-on:perPageChange="perPageChange"
+                    v-on:nextPage="nextPage"
+                    v-on:prevPage="prevPage"
+            >
+            </pagination>
+
+            <table class="table listing">
+                <thead>
+                <tr>
+                    <th v-for="key in columns"
+                        @click="sortBy(key)"
+                        :class="{ active: sortKey == key }">
+                        {{ key | prettify }}
+                        <i class="fa fa-sort" v-if="sortOrders[key] == 0" aria-hidden="true"></i>
+                        <i class="fa fa-sort-desc" v-if="sortOrders[key] == 1" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="sortOrders[key] == 2" aria-hidden="true"></i>
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="entry in data">
+                    <td v-for="key in columns" v-html="transform(entry[key], key)"></td>
+                    <td>
+                        <div class="pull-right">
+                            <a class="btn btn-sm blue" @click="view(entry)"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+
+
 <script>
-    import eventHub from '../../src/EventHub.js';
     import ListingMixin from '../Listing/Table.vue';
+    import eventHub from '../../src/EventHub.js';
 
     export default {
 
@@ -52,12 +94,8 @@
                 return value;
             },
 
-            remove(entry) {
-                console.log('remove');
-            },
-
-            edit(entry) {
-                window.location = '/orders/edit/' + entry.id;
+            view(entry) {
+                window.location = '/orders/' + entry.id;
             }
 
         }

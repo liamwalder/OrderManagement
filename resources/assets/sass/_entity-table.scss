@@ -1,5 +1,4 @@
 .entity-table {
-
   .pagination {
     width: 100%;
     margin-top: 0;
@@ -69,6 +68,11 @@
             color: $orange;
           }
         }
+      }
+    }
+    .total {
+      td {
+        border-top: 2px solid #ddd;
       }
     }
   }

@@ -95,6 +95,18 @@
 /**
 * Buttons
 */
+.blue {
+  border: none !important;
+  color: $white !important;
+  background-color: $blue !important;
+  &:hover {
+    background-color: $blueHover !important;
+  }
+  &.hollow {
+    color: $white !important;
+    border: 1px solid $blue !important;
+  }
+}
 .grey {
   border: none !important;
   color: $black !important;

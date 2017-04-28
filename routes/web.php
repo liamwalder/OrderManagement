@@ -15,6 +15,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 Route::get('/orders', 'OrderController@index')->name('orders.index');
 Route::get('/orders/create', 'OrderController@create')->name('orders.create');
+Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
 Route::get('/orders/edit/{id}', 'OrderController@edit')->name('orders.edit');
 
 Route::get('/products', 'ProductController@index')->name('products.index');

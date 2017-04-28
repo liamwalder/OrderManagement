@@ -30,6 +30,7 @@ Vue.component('edit-order-screen', require('./components/Orders/Edit.vue'));
 /**
  * Orders
  */
+Vue.component('order-single', require('./components/Orders/Single.vue'));
 Vue.component('order-table-listing', require('./components/Orders/Listing.vue'));
 
 /**

@@ -26,6 +26,15 @@ class OrderController extends Controller
         return view('orders.create');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id, OrderRepository $orderRepository)
+    {
+        $order = $orderRepository->findOne($id);
+        return view('orders.show', ['order' => $order]);
+    }
+
 
     /**
      * @param $id

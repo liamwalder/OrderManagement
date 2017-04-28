@@ -1,3 +1,13 @@
+.customer-details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 20px;
+  td {
+    padding: 3px;
+  }
+}
+
 #order-creation {
   .create-order {
     float: right;
@@ -9,17 +19,8 @@
       background-color: white;
       border-right: 1px solid #eeeeee;
       position: relative;
-      .customer-details {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        margin-bottom: 20px;
-        td {
-          padding: 3px;
-        }
-      }
-    }
 
+    }
     .results {
       position: absolute;
       width: 100%;
@@ -30,7 +31,6 @@
         margin-top: -27px;
       }
     }
-
     .section {
       h3 {
         margin-top: 0;
