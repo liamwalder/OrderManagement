@@ -42,9 +42,9 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function status()
+    public function stage()
     {
-        return $this->belongsTo('App\OrderStatus');
+        return $this->belongsTo('App\OrderStage');
     }
 
 

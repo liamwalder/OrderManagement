@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class OrderStatus
+ * Class OrderStage
  * @package App
  */
-class OrderStatus extends Model
+class OrderStage extends Model
 {
     /**
      * @var array

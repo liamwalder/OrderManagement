@@ -3,9 +3,9 @@
 use Illuminate\Database\Seeder;
 
 /**
- * Class OrderSeeder
+ * Class OrderStageSeeder
  */
-class OrderStatusSeeder extends Seeder
+class OrderStageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,17 +14,17 @@ class OrderStatusSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = [
+        $stages = [
             ['name' => 'Placed'],
             ['name' => 'Processed'],
             ['name' => 'Delivered'],
             ['name' => 'Completed']
         ];
 
-        foreach ($statuses as $status) {
-            $newStatus = new \App\OrderStatus();
-            $newStatus->name = $status['name'];
-            $newStatus->save();
+        foreach ($stages as $stage) {
+            $newStage = new \App\OrderStage();
+            $newStage->name = $stage['name'];
+            $newStage->save();
         }
     }
 }
