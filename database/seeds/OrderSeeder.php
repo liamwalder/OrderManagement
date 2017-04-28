@@ -24,7 +24,7 @@ class OrderSeeder extends Seeder
             $order = [
                 'customer_id' => $customerId,
                 'address_id' => $address->id,
-                'status_id' => rand(1, 4)
+                'stage_id' => rand(1, 4)
             ];
 
             $orderModel = new \App\Order();
