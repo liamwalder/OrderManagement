@@ -44,7 +44,7 @@ class Order extends Model
      */
     public function stage()
     {
-        return $this->belongsTo('App\OrderStage');
+        return $this->belongsTo('App\Stage');
     }
 
 

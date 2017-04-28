@@ -3,9 +3,9 @@
 use Illuminate\Database\Seeder;
 
 /**
- * Class OrderStageSeeder
+ * Class StageSeeder
  */
-class OrderStageSeeder extends Seeder
+class StageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class OrderStageSeeder extends Seeder
         ];
 
         foreach ($stages as $stage) {
-            $newStage = new \App\OrderStage();
+            $newStage = new \App\Stage();
             $newStage->name = $stage['name'];
             $newStage->save();
         }

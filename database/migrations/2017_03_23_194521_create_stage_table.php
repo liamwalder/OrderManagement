@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderStageTable extends Migration
+class CreateStageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOrderStageTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_stages', function (Blueprint $table) {
+        Schema::create('stages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateOrderStageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_stages');
+        Schema::dropIfExists('stages');
     }
 }
