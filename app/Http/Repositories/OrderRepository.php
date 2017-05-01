@@ -17,7 +17,7 @@ class OrderRepository extends Repository
     {
         $qb = Order::with('customer')
             ->with('products')
-            ->with('status')
+            ->with('stages')
             ->with(['address' => function($query) {
                 $query->withTrashed();
             }]);

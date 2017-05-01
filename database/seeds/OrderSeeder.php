@@ -21,15 +21,20 @@ class OrderSeeder extends Seeder
             $addresses = \App\Address::where('customer_id', $customerId)->get();
             $address = $addresses->random();
 
+            $stage = rand(1, 4);
+
             $order = [
                 'customer_id' => $customerId,
                 'address_id' => $address->id,
-                'stage_id' => rand(1, 4)
             ];
 
             $orderModel = new \App\Order();
             $orderModel->fill($order);
             $orderModel->save();
+
+            for($stageToAdd = 1; $stageToAdd <= $stage; $stageToAdd++) {
+                $orderModel->stages()->attach($stageToAdd);
+            }
 
             for ($productsToAdd = 1; $productsToAdd < rand(1, 10); $productsToAdd++) {
                 $orderModel->products()->attach(rand(1, 50));

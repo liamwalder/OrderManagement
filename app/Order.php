@@ -24,6 +24,14 @@ class Order extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function stages()
+    {
+        return $this->belongsToMany('App\Stage')->withTimestamps();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function customer()
@@ -38,14 +46,5 @@ class Order extends Model
     {
         return $this->belongsTo('App\Address');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function stage()
-    {
-        return $this->belongsTo('App\Stage');
-    }
-
 
 }

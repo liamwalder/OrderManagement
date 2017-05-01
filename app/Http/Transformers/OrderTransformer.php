@@ -2,6 +2,7 @@
 namespace App\Http\Transformers;
 use App\Address;
 use App\Order;
+use App\Stage;
 
 /**
  * Class OrderTransformer
@@ -47,13 +48,11 @@ class OrderTransformer
      */
     public function transformItem(Order $order)
     {
-
-
-
         return [
             'id' => (int) $order->id,
-            'status' => $order->status->name,
-            'stage' => $order->status->id,
+            'stage_name' => $order->stages->last()->name,
+            'stage_id' => $order->stages->last()->id,
+            'stages' => $this->populateOrderStages($order),
             'value' => number_format($order->products->sum('price'), 2),
             'created_at' => $order->created_at->format('d/m/Y H:i:s'),
             'customer' => $this->customerTransformer->transformItem($order->customer),
@@ -98,6 +97,28 @@ class OrderTransformer
         }
 
         return $products;
+    }
+
+    /**
+     * @param $order
+     * @return array
+     */
+    protected function populateOrderStages($order)
+    {
+        $stages = [];
+
+        foreach (Stage::all() as $orderStage) {
+            $singleStage = $order->stages->filter(function($value, $key) use ($orderStage) {
+                return $value->id == $orderStage->id;
+            });
+
+            $stages[] = [
+                'id' => $orderStage->id,
+                'name' => $orderStage->name,
+                'created' => $singleStage->isEmpty() ? null : $singleStage->first()->created_at->format('d/m/Y H:i:s')
+            ];
+        }
+        return $stages;
     }
 
 }

@@ -21,7 +21,7 @@ class StageSeeder extends Seeder
             ['name' => 'Completed']
         ];
 
-        foreach ($stages as $stage) {
+        foreach ($stages as $key => $stage) {
             $newStage = new \App\Stage();
             $newStage->name = $stage['name'];
             $newStage->save();
