@@ -38608,7 +38608,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 newValue = value.firstname + ' ' + value.surname;
             } else if (key == 'value') {
                 newValue = '£' + value;
-            } else if (key == 'status') {
+            } else if (key == 'stage') {
                 var className = '';
                 if (value == 'Placed') {
                     className = '';

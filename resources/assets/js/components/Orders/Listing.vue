@@ -76,7 +76,7 @@
                 } else if(key == 'value') {
                     newValue = '£'+value;
 
-                } else if (key == 'status') {
+                } else if (key == 'stage') {
                     let className  = '';
                     if (value == 'Placed') {
                         className = '';

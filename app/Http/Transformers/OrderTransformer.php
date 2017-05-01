@@ -50,7 +50,7 @@ class OrderTransformer
     {
         return [
             'id' => (int) $order->id,
-            'stage_name' => $order->stages->last()->name,
+            'stage' => $order->stages->last()->name,
             'stage_id' => $order->stages->last()->id,
             'stages' => $this->populateOrderStages($order),
             'value' => number_format($order->products->sum('price'), 2),

@@ -128,11 +128,15 @@ class OrderRepository extends Repository
                 ->orWhere('customers.firstname', 'like', '%'.$value.'%')
                 ->orWhere('customers.surname', 'like', '%'.$value.'%');
 
-            if (!$this->isJoined($queryBuilder, 'order_statuses')) {
-                $queryBuilder->leftJoin('order_statuses', 'orders.status_id', '=', 'order_statuses.id');
-            }
-            $queryBuilder->orWhere('order_statuses.name', 'like', '%'.$value.'%');
-
+            /**
+             * @todo Search by stage name
+             */
+//            if (!$this->isJoined($queryBuilder, 'order_stage')) {
+//                $queryBuilder->leftJoin('order_stage', 'orders.id', '=', 'order_stage.order_id');
+//                $queryBuilder->leftJoin('stages', 'stages.id', '=', 'order_stage.stage_id');
+//            }
+//            $queryBuilder
+//                ->orWhere('stages.name', 'like', '%'.$value.'%');
 
             /**
              * @todo Implement searching by price on order listing
