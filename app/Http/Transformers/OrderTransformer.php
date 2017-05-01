@@ -115,6 +115,7 @@ class OrderTransformer
             $stages[] = [
                 'id' => $orderStage->id,
                 'name' => $orderStage->name,
+                'classes' => $orderStage->classes,
                 'created' => $singleStage->isEmpty() ? null : $singleStage->first()->created_at->format('d/m/Y H:i:s')
             ];
         }

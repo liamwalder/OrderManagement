@@ -4,33 +4,10 @@
             <div class="col-xs-8 order">
                 <div class="col-md-12 order-progress no-padding-left no-padding-right">
                     <div class="col-md-12"></div>
-                    <div class="col-md-2 stage">
-                        <div class="icon" v-bind:class="{ active: order.stage >= 1 }">
-                            <i class="glyphicon glyphicon-folder-close col-md-12"></i>
-                        </div>
-                        <span class="status">Placed</span>
-                        <span class="date">23/04/2015</span>
-                    </div>
-                    <div class="col-md-2 stage">
-                        <div class="icon" v-bind:class="{ active: order.stage >= 2 }">
-                            <i class="glyphicon glyphicon-folder-close col-md-12"></i>
-                        </div>
-                        <span class="status">Processed</span>
-                        <span class="date">23/04/2015</span>
-                    </div>
-                    <div class="col-md-2 stage">
-                        <div class="icon" v-bind:class="{ active: order.stage >= 3 }">
-                            <i class="glyphicon glyphicon-folder-close col-md-12"></i>
-                        </div>
-                        <span class="status">Delivered</span>
-                        <span class="date">23/04/2015</span>
-                    </div>
-                    <div class="col-md-2 stage">
-                        <div class="icon" v-bind:class="{ active: order.stage >= 4 }">
-                            <i class="glyphicon glyphicon-folder-close col-md-12"></i>
-                        </div>
-                        <span class="status">Completed</span>
-                        <span class="date">23/04/2015</span>
+                    <div class="col-md-2 stage" v-for="(stage, index) in order.stages">
+                        <div class="icon" v-bind:class="{ active: order.stage_id >= stage.id }" v-html="stage.classes"></div>
+                        <span class="status">{{ stage.name }}</span>
+                        <span class="date">{{ stage.created }}</span>
                     </div>
                 </div>
 
@@ -108,7 +85,7 @@
 
         data: function() {
             return {
-                order: null,
+                order: []
             }
         },
 

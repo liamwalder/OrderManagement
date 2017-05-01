@@ -38924,29 +38924,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38957,7 +38934,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            order: null
+            order: []
         };
     },
 
@@ -71144,59 +71121,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12 order-progress no-padding-left no-padding-right"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2 stage"
-  }, [_c('div', {
-    staticClass: "icon",
-    class: {
-      active: _vm.order.stage >= 1
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-folder-close col-md-12"
-  })]), _vm._v(" "), _c('span', {
-    staticClass: "status"
-  }, [_vm._v("Placed")]), _vm._v(" "), _c('span', {
-    staticClass: "date"
-  }, [_vm._v("23/04/2015")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2 stage"
-  }, [_c('div', {
-    staticClass: "icon",
-    class: {
-      active: _vm.order.stage >= 2
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-folder-close col-md-12"
-  })]), _vm._v(" "), _c('span', {
-    staticClass: "status"
-  }, [_vm._v("Processed")]), _vm._v(" "), _c('span', {
-    staticClass: "date"
-  }, [_vm._v("23/04/2015")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2 stage"
-  }, [_c('div', {
-    staticClass: "icon",
-    class: {
-      active: _vm.order.stage >= 3
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-folder-close col-md-12"
-  })]), _vm._v(" "), _c('span', {
-    staticClass: "status"
-  }, [_vm._v("Delivered")]), _vm._v(" "), _c('span', {
-    staticClass: "date"
-  }, [_vm._v("23/04/2015")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-2 stage"
-  }, [_c('div', {
-    staticClass: "icon",
-    class: {
-      active: _vm.order.stage >= 4
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-folder-close col-md-12"
-  })]), _vm._v(" "), _c('span', {
-    staticClass: "status"
-  }, [_vm._v("Completed")]), _vm._v(" "), _c('span', {
-    staticClass: "date"
-  }, [_vm._v("23/04/2015")])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._l((_vm.order.stages), function(stage, index) {
+    return _c('div', {
+      staticClass: "col-md-2 stage"
+    }, [_c('div', {
+      staticClass: "icon",
+      class: {
+        active: _vm.order.stage_id >= stage.id
+      },
+      domProps: {
+        "innerHTML": _vm._s(stage.classes)
+      }
+    }), _vm._v(" "), _c('span', {
+      staticClass: "status"
+    }, [_vm._v(_vm._s(stage.name))]), _vm._v(" "), _c('span', {
+      staticClass: "date"
+    }, [_vm._v(_vm._s(stage.created))])])
+  })], 2), _vm._v(" "), _c('div', {
     staticClass: "entity-table"
   }, [_c('table', {
     staticClass: "table listing"
