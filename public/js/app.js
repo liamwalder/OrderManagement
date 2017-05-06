@@ -38924,6 +38924,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38934,7 +38941,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            order: []
+            order: [],
+            nextStage: null
         };
     },
 
@@ -38942,10 +38950,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var self = this;
         axios.get(Routes.order.single.replace('{id}', this.id)).then(function (response) {
             self.order = response.data;
+            self.workOutNextStage();
         }).catch(function (error) {});
     },
 
-    methods: {}
+    methods: {
+        workOutNextStage: function workOutNextStage() {
+            var self = this;
+            var stages = this.order.stages;
+            stages.forEach(function (stage, key) {
+                if (self.nextStage == null) {
+                    if (stage.created == null) {
+                        self.nextStage = stage.name.toLowerCase();
+                    }
+                }
+            });
+        }
+    }
 
 });
 
@@ -71116,6 +71137,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-xs-12 holder"
   }, [_c('div', {
+    staticClass: "actions col-md-12 no-padding-right"
+  }, [_c('button', {
+    staticClass: "btn btn-md green create-order"
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-ok-sign"
+  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage) + "\n            ")])]), _vm._v(" "), _c('hr', {
+    staticClass: "col-md-12"
+  }), _vm._v(" "), _c('div', {
     staticClass: "col-xs-8 order"
   }, [_c('div', {
     staticClass: "col-md-12 order-progress no-padding-left no-padding-right"

@@ -1,6 +1,13 @@
 <template>
     <div id="order-single" class="col-xs-12">
         <div class="col-xs-12 holder">
+            <div class="actions col-md-12 no-padding-right">
+                <button class="btn btn-md green create-order">
+                    <i class="glyphicon glyphicon-ok-sign"></i>
+                    Mark as {{ nextStage }}
+                </button>
+            </div>
+            <hr class="col-md-12">
             <div class="col-xs-8 order">
                 <div class="col-md-12 order-progress no-padding-left no-padding-right">
                     <div class="col-md-12"></div>
@@ -85,7 +92,8 @@
 
         data: function() {
             return {
-                order: []
+                order: [],
+                nextStage: null
             }
         },
 
@@ -94,11 +102,25 @@
             axios.get(Routes.order.single.replace('{id}', this.id))
             .then(function (response) {
                 self.order = response.data;
+                self.workOutNextStage();
             })
             .catch(function (error) {});
         },
 
         methods: {
+
+            workOutNextStage() {
+                let self = this;
+                let stages = this.order.stages;
+                stages.forEach(function(stage, key) {
+                    if (self.nextStage == null) {
+                        if (stage.created == null) {
+                            self.nextStage = stage.name.toLowerCase();
+                        }
+                    }
+                })
+            }
+
 
         }
 

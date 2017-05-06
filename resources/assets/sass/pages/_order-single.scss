@@ -4,6 +4,10 @@
     border-right: none;
   }
 
+  .actions {
+    text-align: right;
+  }
+
   .holder {
     background-color: white;
     padding: 20px;
@@ -21,7 +25,6 @@
           font-size: 18px;
 
           .date {
-            color: #ddd;
             font-size: 14px;
             font-weight: 500;
           }
