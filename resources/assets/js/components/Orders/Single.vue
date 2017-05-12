@@ -1,7 +1,7 @@
 <template>
     <div id="order-single" class="col-xs-12">
         <div class="col-xs-12 holder">
-            <div class="actions col-md-12 no-padding-right">
+            <div class="actions col-md-12 no-padding-right" v-if="nextStage">
                 <button class="btn btn-md green create-order" @click="progressOrder(nextStage)">
                     <i class="glyphicon glyphicon-ok-sign"></i>
                     Mark as {{ nextStage.name }}
@@ -46,7 +46,7 @@
 
             <div class="col-xs-4 customer">
                 <h4>Customer Details</h4>
-                <table class="customer-details">
+                <table class="customer-details" v-if="order.customer">
                     <tr>
                         <td><i class="fa fa-user" aria-hidden="true"></i></td>
                         <td>{{ order.customer.firstname }} {{ order.customer.surname }}</td>
@@ -66,7 +66,7 @@
                 <div class="addresses">
                     <div class="address col-md-12">
                         <div class="contents">
-                            <div class="breakdown">
+                            <div class="breakdown" v-if="order.address">
                                 <span>{{ order.address.address_1 }}</span>
                                 <span v-if="order.address.address_2">{{ order.address.address_2 }}</span>
                                 <span>{{ order.address.town }}</span>
@@ -140,7 +140,12 @@
                         self.nextStage = stage;
                         foundNextStage = true;
                     }
-                })
+                });
+
+                if (foundNextStage == false) {
+                    self.nextStage = null;
+                }
+
             }
 
 

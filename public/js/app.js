@@ -38983,6 +38983,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     foundNextStage = true;
                 }
             });
+
+            if (foundNextStage == false) {
+                self.nextStage = null;
+            }
         }
     }
 
@@ -71154,7 +71158,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "col-xs-12 holder"
-  }, [_c('div', {
+  }, [(_vm.nextStage) ? _c('div', {
     staticClass: "actions col-md-12 no-padding-right"
   }, [_c('button', {
     staticClass: "btn btn-md green create-order",
@@ -71165,7 +71169,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "glyphicon glyphicon-ok-sign"
-  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage.name) + "\n            ")])]), _vm._v(" "), _c('hr', {
+  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage.name) + "\n            ")])]) : _vm._e(), _vm._v(" "), _c('hr', {
     staticClass: "col-md-12"
   }), _vm._v(" "), _c('div', {
     staticClass: "col-xs-8 order"
@@ -71199,17 +71203,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "total"
   }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.order.value))])])], 2)])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-4 customer"
-  }, [_c('h4', [_vm._v("Customer Details")]), _vm._v(" "), _c('table', {
+  }, [_c('h4', [_vm._v("Customer Details")]), _vm._v(" "), (_vm.order.customer) ? _c('table', {
     staticClass: "customer-details"
-  }, [_c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.firstname) + " " + _vm._s(_vm.order.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(3), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.phone))])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
+  }, [_c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.firstname) + " " + _vm._s(_vm.order.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(3), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.phone))])])]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
     staticClass: "addresses"
   }, [_c('div', {
     staticClass: "address col-md-12"
   }, [_c('div', {
     staticClass: "contents"
-  }, [_c('div', {
+  }, [(_vm.order.address) ? _c('div', {
     staticClass: "breakdown"
-  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])])])])])])])])
+  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])]) : _vm._e()])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
