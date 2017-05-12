@@ -38113,14 +38113,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['title', 'orders', 'color'],
 
     methods: {
         limitFor: function limitFor(items, limit) {
-            return items.slice(0, limit);
+            return items.items.slice(0, limit);
         }
     }
 });
@@ -69598,16 +69597,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-3 no-padding-left"
   }, [_c('order-statistic-widget', {
     attrs: {
-      "orders": _vm.orders.all,
-      "title": "Total Orders",
-      "color": "red"
-    }
-  })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3"
-  }, [_c('order-statistic-widget', {
-    attrs: {
-      "orders": _vm.orders.new,
-      "title": "New Orders",
+      "orders": _vm.orders.placed,
+      "title": "Placed Orders",
       "color": "blue"
     }
   })], 1), _vm._v(" "), _c('div', {
@@ -69619,12 +69610,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "color": "purple"
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-md-3 no-padding-right"
+    staticClass: "col-md-3"
   }, [_c('order-statistic-widget', {
     attrs: {
       "orders": _vm.orders.delivered,
       "title": "Delivered Orders",
       "color": "green"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-3 no-padding-right"
+  }, [_c('order-statistic-widget', {
+    attrs: {
+      "orders": _vm.orders.completed,
+      "title": "Completed Orders",
+      "color": "red"
     }
   })], 1)])
 },staticRenderFns: []}
@@ -70249,11 +70248,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: _vm.color
   }, [_c('h3', [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
-  }, [_c('h4', [_vm._v("Today")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.today.length))])]), _vm._v(" "), _c('div', {
+  }, [_c('h4', [_vm._v("Today")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.today.items.length))])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
-  }, [_c('h4', [_vm._v("Week")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.week.length))])]), _vm._v(" "), _c('div', {
+  }, [_c('h4', [_vm._v("Week")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.week.items.length))])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
-  }, [_c('h4', [_vm._v("Month")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.month.length))])])]), _vm._v(" "), _c('div', {
+  }, [_c('h4', [_vm._v("Month")]), _vm._v(" "), _c('h4', [_vm._v(_vm._s(_vm.orders.month.items.length))])])]), _vm._v(" "), _c('div', {
     staticClass: "latest"
   }, [_c('h5', [_vm._v("Latest")]), _vm._v(" "), _c('table', {
     staticClass: "table"
@@ -70262,7 +70261,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "href": "#"
       }
-    }, [_vm._v(_vm._s(_vm._f("formatDateTimeUK")(order.created_at)) + " - " + _vm._s(order.user.name))])])])
+    }, [_vm._v(_vm._s(_vm._f("formatDateTimeUK")(order.created_at)) + " - " + _vm._s(order.customer.firstname) + " " + _vm._s(order.customer.surname))])])])
   }))])])])]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true

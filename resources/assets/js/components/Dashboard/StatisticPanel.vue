@@ -1,16 +1,16 @@
 <template>
     <div class="col-xs-12 no-padding-left no-padding-right">
         <div class="col-md-3 no-padding-left">
-            <order-statistic-widget :orders="orders.all" title="Total Orders" color="red"></order-statistic-widget>
-        </div>
-        <div class="col-md-3">
-            <order-statistic-widget :orders="orders.new" title="New Orders" color="blue"></order-statistic-widget>
+            <order-statistic-widget :orders="orders.placed" title="Placed Orders" color="blue"></order-statistic-widget>
         </div>
         <div class="col-md-3">
             <order-statistic-widget :orders="orders.processed" title="Processed Orders" color="purple"></order-statistic-widget>
         </div>
-        <div class="col-md-3 no-padding-right">
+        <div class="col-md-3">
             <order-statistic-widget :orders="orders.delivered" title="Delivered Orders" color="green"></order-statistic-widget>
+        </div>
+        <div class="col-md-3 no-padding-right">
+            <order-statistic-widget :orders="orders.completed" title="Completed Orders" color="red"></order-statistic-widget>
         </div>
     </div>
 </template>

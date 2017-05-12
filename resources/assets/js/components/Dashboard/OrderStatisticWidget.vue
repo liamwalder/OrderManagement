@@ -5,15 +5,15 @@
                 <h3>{{ title }}</h3>
                 <div class="col-md-4">
                     <h4>Today</h4>
-                    <h4>{{ orders.today.length }}</h4>
+                    <h4>{{ orders.today.items.length }}</h4>
                 </div>
                 <div class="col-md-4">
                     <h4>Week</h4>
-                    <h4>{{ orders.week.length }}</h4>
+                    <h4>{{ orders.week.items.length }}</h4>
                 </div>
                 <div class="col-md-4">
                     <h4>Month</h4>
-                    <h4>{{ orders.month.length }}</h4>
+                    <h4>{{ orders.month.items.length }}</h4>
                 </div>
             </div>
 
@@ -22,12 +22,11 @@
                 <table class="table">
                     <tbody>
                     <tr v-for="(order, index) in limitFor(orders.all, 5)">
-                        <td><a href="#">{{ order.created_at | formatDateTimeUK }} - {{ order.user.name }}</a></td>
+                        <td><a href="#">{{ order.created_at | formatDateTimeUK }} - {{ order.customer.firstname }} {{ order.customer.surname }}</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </template>
@@ -38,7 +37,7 @@
 
         methods:{
             limitFor: function(items, limit) {
-                return items.slice(0, limit);
+                return items.items.slice(0, limit);
             }
         }
     }

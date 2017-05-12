@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\OrderRepository;
 use App\Http\Services\OrderService;
+use App\Order;
+use App\Product;
+use App\Stage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -21,12 +25,22 @@ class DashboardController extends Controller
     public $orderService;
 
     /**
-     * OrderController constructor.
-     * @param OrderService $orderService
+     * @var OrderRepository
      */
-    public function __construct(OrderService $orderService)
+    public $orderRepository;
+
+    /**
+     * DashboardController constructor.
+     * @param OrderService $orderService
+     * @param OrderRepository $orderRepository
+     */
+    public function __construct(
+        OrderService $orderService,
+        OrderRepository $orderRepository
+    )
     {
         $this->orderService = $orderService;
+        $this->orderRepository = $orderRepository;
     }
 
 
@@ -54,25 +68,28 @@ class DashboardController extends Controller
             ]
         ];
 
-        $orderFilters = [
-            'all' => [],
-            'new' => ['processed' => 0, 'delivered' => 0],
-            'processed' => ['processed' => 1, 'delivered' => 0],
-            'delivered' => ['processed' => 1, 'delivered' => 1]
-        ];
+       foreach (Stage::all() as $stage) {
+           foreach ($dateRanges as $dateKey => $dateRange) {
+
+               if ($dateKey == 'all') {
+                   $orderProducts = \DB::select('SELECT * from order_stage WHERE stage_id = ?', [$stage->id]);
+               } else {
+                   $orderProducts = \DB::select('SELECT * from order_stage WHERE stage_id = ? AND created_at BETWEEN ? AND ?', [$stage->id, $dateRange['start'], $dateRange['end']]);
+               }
 
 
-        foreach ($orderFilters as $orderKey => $filter) {
-            Input::merge($filter);
+               $orderIds = [];
+               foreach ($orderProducts as $key => $orderProduct) {
+                   $orderIds[] = $orderProduct->order_id;
+               }
 
-            foreach ($dateRanges as $dateKey => $dateRange) {
-                if ($dateKey != 'all') {
-                    Input::merge(['between' => $dateRange['start'].'/'.$dateRange['end']]);
-                }
-                $orders = $this->orderService->findAll();
-                $data['orders'][$orderKey][$dateKey] = $orders;
-            }
-        }
+               Input::merge(['in' => $orderIds]);
+               $orders = $this->orderService->findAll();
+
+               $data['orders'][strtolower($stage->name)][$dateKey] = $orders;
+           }
+       }
+
 
         return response()->json($data);
     }

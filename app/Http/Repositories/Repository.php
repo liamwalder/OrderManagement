@@ -55,6 +55,10 @@ class Repository
                             }
                             break;
 
+                        case 'in':
+                            $queryBuilder->whereIn('id', $value);
+                            break;
+
                         default:
                             $queryBuilder->where($key, $value);
                             break;
