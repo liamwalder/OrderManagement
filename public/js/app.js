@@ -38947,22 +38947,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
-        var self = this;
-        axios.get(Routes.order.single.replace('{id}', this.id)).then(function (response) {
-            self.order = response.data;
-            self.workOutNextStage();
-        }).catch(function (error) {});
+        this.getOrder();
     },
 
     methods: {
+        getOrder: function getOrder() {
+            var self = this;
+            axios.get(Routes.order.single.replace('{id}', this.id)).then(function (response) {
+                self.order = response.data;
+                self.workOutNextStage();
+            }).catch(function (error) {});
+        },
+        progressOrder: function progressOrder(nextStage) {
+            var self = this;
+
+            var submission = {
+                order: {
+                    status: nextStage.id
+                }
+            };
+            submission._method = 'PATCH';
+
+            axios.post(Routes.order.edit.replace('{id}', this.id), submission).then(function (response) {
+                self.getOrder();
+            }).catch(function (error) {});
+        },
         workOutNextStage: function workOutNextStage() {
             var self = this;
             var stages = this.order.stages;
+            var foundNextStage = false;
             stages.forEach(function (stage, key) {
-                if (self.nextStage == null) {
-                    if (stage.created == null) {
-                        self.nextStage = stage.name.toLowerCase();
-                    }
+                if (stage.created == null && foundNextStage == false) {
+                    stage.name = stage.name.toLowerCase();
+                    self.nextStage = stage;
+                    foundNextStage = true;
                 }
             });
         }
@@ -71139,10 +71157,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "actions col-md-12 no-padding-right"
   }, [_c('button', {
-    staticClass: "btn btn-md green create-order"
+    staticClass: "btn btn-md green create-order",
+    on: {
+      "click": function($event) {
+        _vm.progressOrder(_vm.nextStage)
+      }
+    }
   }, [_c('i', {
     staticClass: "glyphicon glyphicon-ok-sign"
-  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage) + "\n            ")])]), _vm._v(" "), _c('hr', {
+  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage.name) + "\n            ")])]), _vm._v(" "), _c('hr', {
     staticClass: "col-md-12"
   }), _vm._v(" "), _c('div', {
     staticClass: "col-xs-8 order"

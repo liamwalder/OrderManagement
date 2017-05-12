@@ -20,7 +20,7 @@ class Stage extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany('App\Order')->withTimestamps();
+        return $this->belongsToMany('App\Order');
     }
 
 

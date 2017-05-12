@@ -2,9 +2,9 @@
     <div id="order-single" class="col-xs-12">
         <div class="col-xs-12 holder">
             <div class="actions col-md-12 no-padding-right">
-                <button class="btn btn-md green create-order">
+                <button class="btn btn-md green create-order" @click="progressOrder(nextStage)">
                     <i class="glyphicon glyphicon-ok-sign"></i>
-                    Mark as {{ nextStage }}
+                    Mark as {{ nextStage.name }}
                 </button>
             </div>
             <hr class="col-md-12">
@@ -98,25 +98,47 @@
         },
 
         mounted: function () {
-            let self = this;
-            axios.get(Routes.order.single.replace('{id}', this.id))
-            .then(function (response) {
-                self.order = response.data;
-                self.workOutNextStage();
-            })
-            .catch(function (error) {});
+            this.getOrder();
         },
 
         methods: {
 
+            getOrder() {
+                let self = this;
+                axios.get(Routes.order.single.replace('{id}', this.id))
+                .then(function (response) {
+                    self.order = response.data;
+                    self.workOutNextStage();
+                })
+                .catch(function (error) {});
+            },
+
+            progressOrder(nextStage) {
+                let self = this;
+
+                var submission = {
+                    order: {
+                        status: nextStage.id
+                    }
+                };
+                submission._method = 'PATCH';
+
+                axios.post(Routes.order.edit.replace('{id}', this.id), submission)
+                .then(function (response) {
+                    self.getOrder();
+                })
+                .catch(function (error) {});
+            },
+
             workOutNextStage() {
                 let self = this;
                 let stages = this.order.stages;
+                let foundNextStage = false;
                 stages.forEach(function(stage, key) {
-                    if (self.nextStage == null) {
-                        if (stage.created == null) {
-                            self.nextStage = stage.name.toLowerCase();
-                        }
+                    if (stage.created == null && foundNextStage == false) {
+                        stage.name = stage.name.toLowerCase();
+                        self.nextStage = stage;
+                        foundNextStage = true;
                     }
                 })
             }

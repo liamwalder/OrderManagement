@@ -96,8 +96,16 @@ class OrderService extends Service
     public function update($id, array $data)
     {
         $order = $this->orderRepository->update($id, $data);
-        $order->products()->detach();
-        $order->products()->attach($this->manageOrderProducts($data['products']));
+
+        if (isset($data['products'])) {
+            $order->products()->detach();
+            $order->products()->attach($this->manageOrderProducts($data['products']));
+        }
+
+        if (isset($data['status'])) {
+            $order->stages()->attach($data['status']);
+        }
+
         $order = $this->orderTransformer->transformItem($order);
         return $order;
     }
