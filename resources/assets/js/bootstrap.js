@@ -39,7 +39,8 @@ window.Routes = {
         list: '/api/orders',
         create: '/api/orders',
         single: '/api/order/{id}',
-        edit:    '/api/order/{id}'
+        edit:    '/api/order/{id}',
+        destroy: '/api/order/{id}'
     },
 
     product: {

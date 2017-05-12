@@ -11,7 +11,7 @@
                             <i class="glyphicon glyphicon-pencil"></i>
                             Edit order
                         </a>
-                        <a class="btn red" href="{{ route('orders.create') }}">
+                        <a class="btn red" data-toggle="modal" data-target="#deleteOrderModal">
                             <i class="glyphicon glyphicon-trash"></i>
                             Delete order
                         </a>
@@ -20,5 +20,6 @@
             </div>
         </div>
         <order-single :id="{{ $order->id }}"></order-single>
+        <order-delete-modal  :id="{{ $order->id }}"></order-delete-modal>
     </div>
 @endsection

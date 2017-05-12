@@ -22,10 +22,11 @@ Vue.component('statistic-panel', require('./components/Dashboard/StatisticPanel.
 Vue.component('order-statistic-widget', require('./components/Dashboard/OrderStatisticWidget.vue'));
 
 /**
- * Create order
+ * Order
  */
 Vue.component('create-order-screen', require('./components/Orders/Create.vue'));
 Vue.component('edit-order-screen', require('./components/Orders/Edit.vue'));
+Vue.component('order-delete-modal', require('./components/Orders/Delete.vue'));
 
 /**
  * Orders

@@ -36349,10 +36349,11 @@ Vue.component('statistic-panel', __webpack_require__(202));
 Vue.component('order-statistic-widget', __webpack_require__(201));
 
 /**
- * Create order
+ * Order
  */
 Vue.component('create-order-screen', __webpack_require__(204));
 Vue.component('edit-order-screen', __webpack_require__(205));
+Vue.component('order-delete-modal', __webpack_require__(256));
 
 /**
  * Orders
@@ -39571,7 +39572,8 @@ window.Routes = {
         list: '/api/orders',
         create: '/api/orders',
         single: '/api/order/{id}',
-        edit: '/api/order/{id}'
+        edit: '/api/order/{id}',
+        destroy: '/api/order/{id}'
     },
 
     product: {
@@ -71842,6 +71844,172 @@ module.exports = function listToStyles (parentId, list) {
 __webpack_require__(133);
 module.exports = __webpack_require__(134);
 
+
+/***/ }),
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+        id: null
+    },
+
+    methods: {
+        deleteOrder: function deleteOrder() {
+            var self = this;
+            var button = $('#deleteOrderModal button[name="delete"]').button('loading');
+
+            var hiddenIdInputValue = $('#deleteOrderModal input[name="id"]').val();
+
+            axios.delete(Routes.order.destroy.replace('{id}', hiddenIdInputValue)).then(function (response) {
+                $('#deleteCustomerModal button[name="close"]').trigger('click');
+                window.location = '/orders';
+            }).catch(function (error) {
+                self.errors = error.response.data;
+                button.button('reset');
+            });
+        }
+    }
+
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3)))
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(255),
+  /* template */
+  __webpack_require__(257),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/liamwalder/Sites/butchers/resources/assets/js/components/Orders/Delete.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Delete.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-194af9de", Component.options)
+  } else {
+    hotAPI.reload("data-v-194af9de", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "tabindex": "-1",
+      "role": "dialog",
+      "id": "deleteOrderModal"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "modal-body"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.id),
+      expression: "id"
+    }],
+    attrs: {
+      "type": "hidden",
+      "name": "id"
+    },
+    domProps: {
+      "value": (_vm.id)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.id = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('h4', [_vm._v("Are you sure you want to delete this order?")])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button",
+      "name": "close",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Close")]), _vm._v(" "), _c('button', {
+    staticClass: "btn red",
+    attrs: {
+      "type": "button",
+      "name": "delete",
+      "data-loading-text": "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>"
+    },
+    on: {
+      "click": function($event) {
+        _vm.deleteOrder()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-trash"
+  }), _vm._v(" Delete")])])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-194af9de", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
