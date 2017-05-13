@@ -38664,11 +38664,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else if (key == 'stage') {
                 var className = '';
                 if (value.name == 'Placed') {
-                    className = '';
+                    className = 'blue';
                 } else if (value.name == 'Processed') {
                     className = 'orange';
                 } else if (value.name == 'Completed') {
                     className = 'green';
+                } else if (value.name == 'Delivered') {
+                    className = 'purple';
                 }
                 newValue = '<span class="status ' + className + '">' + value.name + '</span>';
             } else {

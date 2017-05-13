@@ -79,11 +79,13 @@
                 } else if (key == 'stage') {
                     let className  = '';
                     if (value.name == 'Placed') {
-                        className = '';
+                        className = 'blue';
                     } else if (value.name == 'Processed') {
                         className = 'orange';
                     } else if (value.name == 'Completed') {
                         className = 'green';
+                    } else if (value.name == 'Delivered') {
+                        className = 'purple';
                     }
                     newValue = '<span class="status ' + className + '">' + value.name + '</span>';
                 } else {
