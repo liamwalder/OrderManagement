@@ -81,6 +81,7 @@ class OrderService extends Service
 
         $order = $this->orderRepository->create($data);
         $order->products()->attach($this->manageOrderProducts($data['products']));
+        $order->stages()->attach(1);
         $order = $this->orderTransformer->transformItem($order);
 
         return $order;

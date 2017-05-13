@@ -13,7 +13,7 @@ class Order extends Model
     /**
      * @var array
      */
-    public $fillable = [ 'customer_id', 'address_id', 'status_id' ];
+    public $fillable = [ 'customer_id', 'address_id' ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
