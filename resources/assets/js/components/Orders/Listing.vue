@@ -78,14 +78,14 @@
 
                 } else if (key == 'stage') {
                     let className  = '';
-                    if (value == 'Placed') {
+                    if (value.name == 'Placed') {
                         className = '';
-                    } else if (key == 'Processed') {
+                    } else if (value.name == 'Processed') {
                         className = 'orange';
-                    } else if (key == 'Completed') {
+                    } else if (value.name == 'Completed') {
                         className = 'green';
                     }
-                    newValue = '<span class="status ' + className + '">' + value + '</span>';
+                    newValue = '<span class="status ' + className + '">' + value.name + '</span>';
                 } else {
                     newValue = value;
                 }

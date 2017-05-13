@@ -22,7 +22,9 @@
                 <table class="table">
                     <tbody>
                     <tr v-for="(order, index) in limitFor(orders.all, 5)">
-                        <td><a href="#">{{ order.created_at | formatDateTimeUK }} - {{ order.customer.firstname }} {{ order.customer.surname }}</a></td>
+                        <td>
+                            <a v-bind:href="'orders/'+ order.id">{{ order.stage.pivot.created_at | formatDateTimeUK }} - {{ order.customer.firstname }} {{ order.customer.surname }}</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
