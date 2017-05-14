@@ -28,6 +28,11 @@
         <div id="wrapper">
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
+
+                    <div class="logo">
+                        <img src="{{ asset(('images/logo.png')) }}" />
+                    </div>
+
                     <ul class="nav in" id="side-menu">
                         <li {{ Request::is('/') ? 'class=active' : null }}>
                             <a href="{{ route('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
