@@ -12,17 +12,32 @@
 */
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::get('/', 'DashboardController@index')->name('dashboard');
+Route::group(['middleware' => ['auth:api']], function () {
 
-Route::get('/orders', 'OrderController@index')->name('orders.index');
-Route::get('/orders/create', 'OrderController@create')->name('orders.create');
-Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
-Route::get('/orders/edit/{id}', 'OrderController@edit')->name('orders.edit');
+  Route::get('/', 'DashboardController@index')->name('dashboard');
 
-Route::get('/products', 'ProductController@index')->name('products.index');
+  Route::get('/orders', 'OrderController@index')->name('orders.index');
+  Route::get('/orders/create', 'OrderController@create')->name('orders.create');
+  Route::get('/orders/{id}', 'OrderController@show')->name('orders.show');
+  Route::get('/orders/edit/{id}', 'OrderController@edit')->name('orders.edit');
 
-Route::get('/customers', 'CustomerController@index')->name('customers.index');
+  Route::get('/products', 'ProductController@index')->name('products.index');
 
+  Route::get('/customers', 'CustomerController@index')->name('customers.index');
+  
+});
+
+
+
+
+/**
+ *
+ *
+ * Deal with later
+ *
+ *
+ *
+ */
 Route::group(['prefix' => 'customer'], function () {
   Route::get('/login', 'CustomerAuth\LoginController@showLoginForm');
   Route::post('/login', 'CustomerAuth\LoginController@login');
