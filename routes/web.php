@@ -12,7 +12,7 @@
 */
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::group(['middleware' => ['auth:api']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
   Route::get('/', 'DashboardController@index')->name('dashboard');
 
@@ -26,8 +26,6 @@ Route::group(['middleware' => ['auth:api']], function () {
   Route::get('/customers', 'CustomerController@index')->name('customers.index');
   
 });
-
-
 
 
 /**
