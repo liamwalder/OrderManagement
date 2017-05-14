@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
             $user = [
                 'name' => $faker->name,
                 'email' => $faker->email,
-                'password' => bcrypt($faker->password)
+                'password' => bcrypt($faker->password),
+                'api_token' => str_random(60)
             ];
 
             $userModel = new \App\User();
