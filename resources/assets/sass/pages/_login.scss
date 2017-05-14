@@ -1,0 +1,36 @@
+#wrapper.login {
+  margin: 0;
+  background-color: $background !important;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  #page-wrapper {
+    height: auto;
+    position: relative;
+    margin: 0;
+    margin-top: 5%;
+    background: $background;
+    border: none;
+    padding: 0;
+    .holder {
+      background-color: $white;
+      padding: 2% 5% 6% 5%;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 5px;
+
+      .logo {
+        text-align: center;
+        margin-bottom: 25px;
+        img {
+          width: 35%
+        }
+      }
+      form {
+        input {
+          @include inputText();
+        }
+      }
+    }
+  }
+}
