@@ -38,4 +38,21 @@ class Customer extends Authenticatable
     {
         $this->notify(new CustomerResetPassword($token));
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
 }
