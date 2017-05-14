@@ -38195,6 +38195,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71471,8 +71473,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "showing col-md-6 no-padding-left"
   }, [_c('p', {
     staticClass: "col-md-6 col-lg-4 no-padding-left"
-  }, [_vm._v("Showing " + _vm._s(_vm.pagination.showing) + " of " + _vm._s(_vm.pagination.total))]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
+  }, [_vm._v("Showing " + _vm._s(_vm.pagination.showing) + " of " + _vm._s(_vm.pagination.total))])]), _vm._v(" "), _c('div', {
+    staticClass: "next-prev col-md-6 no-padding-right"
+  }, [_c('div', {
+    staticClass: "buttons"
+  }, [_c('button', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.prevPage()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-chevron-left"
+  }), _vm._v(" Prev")]), _vm._v(" "), _c('button', {
+    staticClass: "btn",
+    on: {
+      "click": function($event) {
+        _vm.nextPage()
+      }
+    }
+  }, [_vm._v("Next "), _c('i', {
+    staticClass: "glyphicon glyphicon-chevron-right"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-2 per-page"
   }, [_c('select', {
     directives: [{
       name: "model",
@@ -71504,27 +71528,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "50"
     }
-  }, [_vm._v("Show 50")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "next-prev col-md-6 no-padding-right"
-  }, [_c('button', {
-    staticClass: "btn",
-    on: {
-      "click": function($event) {
-        _vm.prevPage()
-      }
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-chevron-left"
-  }), _vm._v(" Prev")]), _vm._v(" "), _c('button', {
-    staticClass: "btn",
-    on: {
-      "click": function($event) {
-        _vm.nextPage()
-      }
-    }
-  }, [_vm._v("Next "), _c('i', {
-    staticClass: "glyphicon glyphicon-chevron-right"
-  })])])])
+  }, [_vm._v("Show 50")])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

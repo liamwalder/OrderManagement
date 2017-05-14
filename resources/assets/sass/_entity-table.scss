@@ -12,29 +12,37 @@
          margin: 0;
          color: darken($grey, 20%);
        }
-      select {
-        border: none;
-        color: darken($grey, 20%);
-        option {
-          color: darken($grey, 20%);
-        }
-      }
+
     }
     .next-prev {
       float: right;
       text-align: right;
-      button {
-        background-color: $white;
-        color: darken($grey, 20%);
-        &:first-child {
-          border-top-right-radius: 0 !important;
-          border-bottom-right-radius: 0 !important;
-          border-right: 1px solid #EFEFEF;
+      .per-page {
+        float: right;
+        select {
+          border: none;
+          float: right;
+          color: darken($grey, 20%);
+          option {
+            color: darken($grey, 20%);
+          }
         }
-        &:last-child {
-          margin-left: -4px;
-          border-top-left-radius: 0 !important;
-          border-bottom-left-radius: 0 !important;
+      }
+      .buttons {
+        float: right;
+        button {
+          background-color: $white;
+          color: darken($grey, 20%);
+          &:first-child {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-right: 1px solid #EFEFEF;
+          }
+          &:last-child {
+            margin-left: -4px;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+          }
         }
       }
     }
