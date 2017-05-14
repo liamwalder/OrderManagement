@@ -103,6 +103,9 @@ class CustomerRepository extends Repository
     {
         if (Input::has('search')) {
             $value = Input::get('search');
+
+            $queryBuilder->select(['customers.*']);
+
             $queryBuilder->where('customers.firstname', 'like', '%'.$value.'%');
             $queryBuilder->orWhere('customers.surname', 'like', '%'.$value.'%');
             $queryBuilder->orWhere('customers.email', 'like', '%'.$value.'%');
