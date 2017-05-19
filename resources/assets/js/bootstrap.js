@@ -28,6 +28,7 @@ window.Vue = require('vue');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common = {
+    'Authorization': 'Bearer ' + window.Laravel.authToken,
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };

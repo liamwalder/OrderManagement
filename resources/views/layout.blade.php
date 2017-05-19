@@ -67,7 +67,11 @@
                 @yield('content')
             </div>
         </div>
-        <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' };</script>
+        <script>
+            window.Laravel = {
+                csrfToken: '{{ csrf_token() }}',
+                authToken: '{{ \Auth::user()->api_token }}'
+            };</script>
         <script src="{{ asset('js/app.js') }}"></script>
         @yield('footer_javascript')
     </body>

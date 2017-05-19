@@ -39618,6 +39618,7 @@ window.Vue = __webpack_require__(131);
 window.axios = __webpack_require__(135);
 
 window.axios.defaults.headers.common = {
+    'Authorization': 'Bearer ' + window.Laravel.authToken,
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
