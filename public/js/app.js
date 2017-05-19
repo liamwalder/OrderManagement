@@ -38988,6 +38988,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71325,20 +71330,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "col-xs-12 holder"
-  }, [(_vm.nextStage) ? _c('div', {
-    staticClass: "actions col-md-12 no-padding-right"
-  }, [_c('button', {
-    staticClass: "btn btn-md green create-order",
-    on: {
-      "click": function($event) {
-        _vm.progressOrder(_vm.nextStage)
-      }
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-ok-sign"
-  }), _vm._v("\n                Mark as " + _vm._s(_vm.nextStage.name) + "\n            ")])]) : _vm._e(), _vm._v(" "), _c('hr', {
-    staticClass: "col-md-12"
-  }), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "col-xs-8 order"
   }, [_c('div', {
     staticClass: "col-md-12 order-progress no-padding-left no-padding-right"
@@ -71380,7 +71372,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "contents"
   }, [(_vm.order.address) ? _c('div', {
     staticClass: "breakdown"
-  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])]) : _vm._e()])])])])])])
+  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])]) : _vm._e()])])])]), _vm._v(" "), (_vm.nextStage) ? _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('hr'), _vm._v(" "), _c('div', {
+    staticClass: "actions col-md-12 no-padding-right"
+  }, [_c('button', {
+    staticClass: "btn btn-md green create-order",
+    on: {
+      "click": function($event) {
+        _vm.progressOrder(_vm.nextStage)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-ok-sign"
+  }), _vm._v("\n                    Mark as " + _vm._s(_vm.nextStage.name) + "\n                ")])])]) : _vm._e()])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

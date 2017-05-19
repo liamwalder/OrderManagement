@@ -1,13 +1,7 @@
 <template>
     <div id="order-single" class="col-xs-12">
         <div class="col-xs-12 holder">
-            <div class="actions col-md-12 no-padding-right" v-if="nextStage">
-                <button class="btn btn-md green create-order" @click="progressOrder(nextStage)">
-                    <i class="glyphicon glyphicon-ok-sign"></i>
-                    Mark as {{ nextStage.name }}
-                </button>
-            </div>
-            <hr class="col-md-12">
+
             <div class="col-xs-8 order">
                 <div class="col-md-12 order-progress no-padding-left no-padding-right">
                     <div class="col-md-12"></div>
@@ -21,11 +15,11 @@
                 <div class="entity-table">
                     <table class="table listing">
                         <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(product, index) in order.products">
@@ -77,6 +71,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12" v-if="nextStage">
+                <hr>
+                <div class="actions col-md-12 no-padding-right">
+                    <button class="btn btn-md green create-order" @click="progressOrder(nextStage)">
+                        <i class="glyphicon glyphicon-ok-sign"></i>
+                        Mark as {{ nextStage.name }}
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
