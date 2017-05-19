@@ -10,8 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 
+Route::group(['middleware' => ['web']], function () {
+  Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'Auth\LoginController@login');
+  Route::post('/logout', 'Auth\LoginController@logout');
+});
+
+
+/**
+ *
+ */
 Route::group(['middleware' => ['auth']], function () {
 
   Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -28,24 +37,17 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-/**
- *
- *
- * Deal with later
- *
- *
- *
- */
-Route::group(['prefix' => 'customer'], function () {
-  Route::get('/login', 'CustomerAuth\LoginController@showLoginForm');
-  Route::post('/login', 'CustomerAuth\LoginController@login');
-  Route::post('/logout', 'CustomerAuth\LoginController@logout');
 
-  Route::get('/register', 'CustomerAuth\RegisterController@showRegistrationForm');
-  Route::post('/register', 'CustomerAuth\RegisterController@register');
-
-  Route::post('/password/email', 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail');
-  Route::post('/password/reset', 'CustomerAuth\ResetPasswordController@reset');
-  Route::get('/password/reset', 'CustomerAuth\ForgotPasswordController@showLinkRequestForm');
-  Route::get('/password/reset/{token}', 'CustomerAuth\ResetPasswordController@showResetForm');
-});
+//Route::group(['prefix' => 'customer'], function () {
+//  Route::get('/login', 'CustomerAuth\LoginController@showLoginForm');
+//  Route::post('/login', 'CustomerAuth\LoginController@login');
+//  Route::post('/logout', 'CustomerAuth\LoginController@logout');
+//
+//  Route::get('/register', 'CustomerAuth\RegisterController@showRegistrationForm');
+//  Route::post('/register', 'CustomerAuth\RegisterController@register');
+//
+//  Route::post('/password/email', 'CustomerAuth\ForgotPasswordController@sendResetLinkEmail');
+//  Route::post('/password/reset', 'CustomerAuth\ResetPasswordController@reset');
+//  Route::get('/password/reset', 'CustomerAuth\ForgotPasswordController@showLinkRequestForm');
+//  Route::get('/password/reset/{token}', 'CustomerAuth\ResetPasswordController@showResetForm');
+//});

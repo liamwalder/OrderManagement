@@ -4,3 +4,7 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]
+
+# Include Authorization header in a request
+ RewriteCond %{HTTP:Authorization} ^(.+)$
+ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

@@ -25,14 +25,24 @@
                         <img src={{ asset('images/logo.png') }} />
                     </div>
 
-                    <form>
+                    <form method="post" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+
+                        @if (count($errors))
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input class="form-control" />
+                            <input class="form-control" name="email"/>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input class="form-control" />
+                            <input type="password" class="form-control" name="password" />
                         </div>
                         <button type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>" class="btn btn-default btn-block green">Login</button>
                     </form>

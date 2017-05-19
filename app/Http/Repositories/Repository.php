@@ -18,7 +18,7 @@ class Repository
     public function applyFilters($queryBuilder)
     {
         // Excluding 'l' is silly here... Let not speak about it
-        $exclude = ['per-page', 'order_by', 'direction', 'search', 'l'];
+        $exclude = ['per-page', 'order_by', 'direction', 'search', 'l', 'api_token'];
         $filters = Input::all();
 
         $queryBuilder->offset(0);
