@@ -14,13 +14,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
+        $user = [
+            'name' => 'Liam Walder',
+            'email' => 'liamwalder@test.com',
+            'password' => password_hash('password', PASSWORD_BCRYPT)
+        ];
+
+        $userModel = new \App\User();
+        $userModel->fill($user);
+        $userModel->save();
+
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 10; $i++) {
             $user = [
                 'name' => $faker->name,
                 'email' => $faker->email,
-                'password' => bcrypt($faker->password),
-                'api_token' => str_random(60)
+                'password' => password_hash('password', PASSWORD_BCRYPT)
             ];
 
             $userModel = new \App\User();

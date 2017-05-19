@@ -18,6 +18,17 @@ class UserRepository
     }
 
     /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function findWhere($key, $value)
+    {
+        $user = User::where($key, $value)->get();
+        return $user;
+    }
+
+    /**
      * @param $id
      * @return mixed
      */

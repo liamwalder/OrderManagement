@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 //        Barryvdh\Debugbar\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
+        Optimus\ApiConsumer\Provider\LaravelServiceProvider::class,
 
     ],
 

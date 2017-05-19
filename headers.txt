@@ -1,0 +1,12 @@
+HTTP/1.1 500 Internal Server Error
+Date: Wed, 17 May 2017 20:29:52 GMT
+Server: Apache/2.4.23 (Unix) PHP/5.6.25
+X-Powered-By: PHP/5.6.25
+Cache-Control: no-cache, private
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+Set-Cookie: laravel_session=O4hMUSUx28DYo8AReb7cxY7vArtCi7PJKqdz8vAv; expires=Wed, 17-May-2017 22:29:52 GMT; Max-Age=7200; path=/; httponly
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+

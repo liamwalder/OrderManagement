@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('/login', 'Api\Auth\LoginController@login');
+Route::post('/login/refresh', 'Api\Auth\LoginController@refresh');
+Route::post('/logout', 'Api\Auth\LoginController@logout');
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/dashboard', 'Api\DashboardController@statisticPanel');
 

@@ -9,8 +9,10 @@
         "barryvdh/laravel-debugbar": "^2.3",
         "hesto/multi-auth": "^1.0",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "^2.0",
         "laravel/tinker": "~1.0",
-        "nicolaslopezj/searchable": "^1.9"
+        "nicolaslopezj/searchable": "^1.9",
+        "optimus/api-consumer": "0.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
