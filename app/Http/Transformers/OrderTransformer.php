@@ -117,7 +117,7 @@ class OrderTransformer
                 'id' => $orderStage->id,
                 'name' => $orderStage->name,
                 'classes' => $orderStage->classes,
-                'created' => $singleStage->isEmpty() ? null : $singleStage->first()->pivot->created_at->format('d/m/Y H:i:s')
+                'created' => $singleStage->isEmpty() ? null : $singleStage->first()->pivot->created_at->format('d/m/Y H:i')
             ];
         }
         return $stages;
