@@ -128,6 +128,8 @@
                         addresses: this.addresses
                     }
                 };
+
+                console.log(submission);
                 axios.post(Routes.customer.create, submission)
                 .then(function (response) {
                     button.button('reset');

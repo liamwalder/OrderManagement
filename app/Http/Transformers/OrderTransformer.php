@@ -54,7 +54,7 @@ class OrderTransformer
             'stage_id' => $order->stages->last()->id,
             'stages' => $this->populateOrderStages($order),
             'value' => number_format($order->products->sum('price'), 2),
-            'created_at' => $order->created_at->format('d/m/Y H:i:s'),
+            'created_at' => $order->created_at->format('F j, Y, g:i a'),
             'customer' => $this->customerTransformer->transformItem($order->customer),
             'address' => $this->addressTransformer->transformItem($order->address),
             'products' => $this->groupProducts($this->productTransformer->transformCollection($order->products)),

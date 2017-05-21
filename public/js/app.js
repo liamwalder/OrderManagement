@@ -37717,6 +37717,8 @@ module.exports = function spread(callback) {
                     addresses: this.addresses
                 }
             };
+
+            console.log(submission);
             axios.post(Routes.customer.create, submission).then(function (response) {
                 button.button('reset');
                 self.$emit('successfulSubmission');
@@ -70075,7 +70077,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('td', [_c('div', {
       staticClass: "pull-right"
     }, [_c('a', {
-      staticClass: "btn btn-sm blue",
+      staticClass: "btn btn-sm blue hollow",
       on: {
         "click": function($event) {
           _vm.view(entry)
@@ -70086,7 +70088,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "aria-hidden": "true"
       }
-    }), _vm._v(" View")])])])], 2)
+    }), _vm._v(" View Order")])])])], 2)
   }))])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true

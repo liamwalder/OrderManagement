@@ -29,7 +29,7 @@
                     <td v-for="key in columns" v-html="transform(entry[key], key)"></td>
                     <td>
                         <div class="pull-right">
-                            <a class="btn btn-sm blue" @click="view(entry)"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                            <a class="btn btn-sm blue hollow" @click="view(entry)"><i class="fa fa-eye" aria-hidden="true"></i> View Order</a>
                         </div>
                     </td>
                 </tr>
