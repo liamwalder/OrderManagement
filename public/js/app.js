@@ -71395,7 +71395,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', [_c('td', [_vm._v(_vm._s(product.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(product.quantity))]), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(product.price))])])
   }), _vm._v(" "), _c('tr', {
     staticClass: "total"
-  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.order.value))])])], 2)])])])]), _vm._v(" "), _c('div', {
+  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.total))])])], 2)])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-4 no-padding-right"
   }, [_c('div', {
     staticClass: "holder"

@@ -36,7 +36,7 @@
                             <tr class="total">
                                 <td></td>
                                 <td></td>
-                                <td>£{{ order.value }}</td>
+                                <td>{{ order.total }}</td>
                             </tr>
                         </tbody>
                     </table>
