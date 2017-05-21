@@ -15,8 +15,9 @@
                 <tr>
                     <th v-for="key in columns"
                         @click="sortBy(key)"
-                        :class="{ active: sortKey == key }">
-                        {{ key | prettify }}
+                        :class="{ active: sortKey == key }"
+                        >
+                        {{ headerLabel(key) | prettify }}
                         <i class="fa fa-sort" v-if="sortOrders[key] == 0" aria-hidden="true"></i>
                         <i class="fa fa-sort-desc" v-if="sortOrders[key] == 1" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc" v-if="sortOrders[key] == 2" aria-hidden="true"></i>
@@ -57,43 +58,62 @@
 
         methods: {
 
+            headerLabel(key) {
+                let headerLabel = '';
+                switch (key) {
+                    case 'id':
+                        headerLabel = 'Reference';
+                        break;
+                    case 'value':
+                        headerLabel = 'Total';
+                        break;
+                    case 'stage':
+                        headerLabel = 'Status';
+                        break;
+                    case 'created_at':
+                        headerLabel = 'Ordered Date';
+                        break;
+                    default:
+                        headerLabel = key;
+                        break;
+                }
+                return headerLabel;
+            },
+
             transform(value, key) {
                 let newValue = '';
-                if (key == 'address') {
-                    newValue += '<ul>';
-                    newValue += '<li>'
-                    newValue += value.address_1 + ', '
-                            + value.address_2 + ', '
-                            + value.town + ', '
-                            + value.county + ', '
-                            + value.postcode
-                            + '</li>';
-                    newValue = newValue.replace('null,', '');
-                    newValue += '</ul>';
-                } else if(key == 'customer') {
-                    newValue = value.firstname + ' ' + value.surname;
-
-                } else if(key == 'value') {
-                    newValue = '£'+value;
-
-                } else if (key == 'stage') {
-                    let className  = '';
-                    if (value.name == 'Placed') {
-                        className = 'blue';
-                    } else if (value.name == 'Processed') {
-                        className = 'orange';
-                    } else if (value.name == 'Completed') {
-                        className = 'green';
-                    } else if (value.name == 'Delivered') {
-                        className = 'purple';
-                    }
-                    newValue = '<span class="status ' + className + '">' + value.name + '</span>';
-                } else {
-                    newValue = value;
+                switch (key) {
+                    case 'id':
+                        newValue = '#' + value;
+                        break;
+                    case 'address':
+                        newValue = value.address_1 + ', ' + value.address_2 + ', ' + value.town + ', ' + value.county + ', ' + value.postcode;
+                        newValue = newValue.replace('null,', '');
+                        break;
+                    case 'customer':
+                        newValue = value.firstname + ' ' + value.surname;
+                        break;
+                    case 'value':
+                        newValue = '£'+value;
+                        break;
+                    case 'stage':
+                        let className  = 'hollow ';
+                        if (value.name == 'Placed') {
+                            className += 'blue';
+                        } else if (value.name == 'Processed') {
+                            className += 'orange';
+                        } else if (value.name == 'Completed') {
+                            className += 'green';
+                        } else if (value.name == 'Delivered') {
+                            className += 'purple';
+                        }
+                        newValue = '<span class="status ' + className + '">' + value.name + '</span>';
+                        break;
+                    default:
+                        newValue = value;
+                        break;
                 }
-
-                value = newValue;
-                return value;
+                return newValue;
             },
 
             view(entry) {

@@ -16,7 +16,7 @@
         </div>
     </div>
     <order-table-listing
-        :columns="['id', 'stage', 'value', 'customer', 'address', 'created_at']"
+        :columns="['id', 'created_at', 'customer', 'address', 'stage', 'value']"
         :api-url="'{{ route('api.order.listing') }}?l='"
     >
 

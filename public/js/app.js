@@ -38637,6 +38637,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -38653,36 +38654,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        headerLabel: function headerLabel(key) {
+            var headerLabel = '';
+            switch (key) {
+                case 'id':
+                    headerLabel = 'Reference';
+                    break;
+                case 'value':
+                    headerLabel = 'Total';
+                    break;
+                case 'stage':
+                    headerLabel = 'Status';
+                    break;
+                case 'created_at':
+                    headerLabel = 'Ordered Date';
+                    break;
+                default:
+                    headerLabel = key;
+                    break;
+            }
+            return headerLabel;
+        },
         transform: function transform(value, key) {
             var newValue = '';
-            if (key == 'address') {
-                newValue += '<ul>';
-                newValue += '<li>';
-                newValue += value.address_1 + ', ' + value.address_2 + ', ' + value.town + ', ' + value.county + ', ' + value.postcode + '</li>';
-                newValue = newValue.replace('null,', '');
-                newValue += '</ul>';
-            } else if (key == 'customer') {
-                newValue = value.firstname + ' ' + value.surname;
-            } else if (key == 'value') {
-                newValue = '£' + value;
-            } else if (key == 'stage') {
-                var className = '';
-                if (value.name == 'Placed') {
-                    className = 'blue';
-                } else if (value.name == 'Processed') {
-                    className = 'orange';
-                } else if (value.name == 'Completed') {
-                    className = 'green';
-                } else if (value.name == 'Delivered') {
-                    className = 'purple';
-                }
-                newValue = '<span class="status ' + className + '">' + value.name + '</span>';
-            } else {
-                newValue = value;
+            switch (key) {
+                case 'id':
+                    newValue = '#' + value;
+                    break;
+                case 'address':
+                    newValue = value.address_1 + ', ' + value.address_2 + ', ' + value.town + ', ' + value.county + ', ' + value.postcode;
+                    newValue = newValue.replace('null,', '');
+                    break;
+                case 'customer':
+                    newValue = value.firstname + ' ' + value.surname;
+                    break;
+                case 'value':
+                    newValue = '£' + value;
+                    break;
+                case 'stage':
+                    var className = 'hollow ';
+                    if (value.name == 'Placed') {
+                        className += 'blue';
+                    } else if (value.name == 'Processed') {
+                        className += 'orange';
+                    } else if (value.name == 'Completed') {
+                        className += 'green';
+                    } else if (value.name == 'Delivered') {
+                        className += 'purple';
+                    }
+                    newValue = '<span class="status ' + className + '">' + value.name + '</span>';
+                    break;
+                default:
+                    newValue = value;
+                    break;
             }
-
-            value = newValue;
-            return value;
+            return newValue;
         },
         view: function view(entry) {
             window.location = '/orders/' + entry.id;
@@ -70051,7 +70077,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.sortBy(key)
         }
       }
-    }, [_vm._v("\n                    " + _vm._s(_vm._f("prettify")(key)) + "\n                    "), (_vm.sortOrders[key] == 0) ? _c('i', {
+    }, [_vm._v("\n                    " + _vm._s(_vm._f("prettify")(_vm.headerLabel(key))) + "\n                    "), (_vm.sortOrders[key] == 0) ? _c('i', {
       staticClass: "fa fa-sort",
       attrs: {
         "aria-hidden": "true"
