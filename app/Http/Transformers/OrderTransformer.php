@@ -50,10 +50,10 @@ class OrderTransformer
     {
         return [
             'id' => (int) $order->id,
+            'total' => '£' . $order->total,
             'stage' => $order->stages->last(),
             'stage_id' => $order->stages->last()->id,
             'stages' => $this->populateOrderStages($order),
-            'value' => number_format($order->products->sum('price'), 2),
             'created_at' => $order->created_at->format('F j, Y, g:i a'),
             'customer' => $this->customerTransformer->transformItem($order->customer),
             'address' => $this->addressTransformer->transformItem($order->address),
