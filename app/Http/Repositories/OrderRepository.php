@@ -15,16 +15,30 @@ class OrderRepository extends Repository
      */
     public function findAll()
     {
-        $qb = Order::with('customer')
-            ->with('products')
-            ->with('stages')
-            ->with(['address' => function($query) {
-                $query->withTrashed();
-            }]);
-        $qb = $this->order($qb);
-        $qb = $this->applyFilters($qb);
-        $qb = $this->search($qb);
-        $orders = $qb->get();
+//        $qb = Order::with('customer')
+//            ->with('products')
+//            ->with('stages')
+//            ->with(['address' => function($query) {
+//                $query->withTrashed();
+//            }]);
+//        $qb = $this->order($qb);
+//        $qb = $this->applyFilters($qb);
+//        $qb = $this->search($qb);
+//        $orders = $qb->get();
+
+        $searchTerm = Input::get('search');
+        $orderBy = Input::get('order_by');
+        $orderDirection = Input::get('direction');
+
+        $orders = Order::search($searchTerm)
+                ->take(2)
+                ->get()
+        ;
+
+
+//            ->where('firstname', 'Adrian')
+//            ->get();
+
         return $orders;
     }
 
@@ -153,6 +167,17 @@ class OrderRepository extends Repository
 
         return $queryBuilder;
     }
+
+
+
+
+    public function orderby()
+    {
+
+
+    }
+
+
 
     /**
      * @param $queryBuilder

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Order
@@ -10,10 +11,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
+    
+    use Searchable;
+
+    /**
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $order = $this->toArray();
+        $customer = $this->customer->toArray();
+        $address = $this->address->toArray();
+
+        return [
+            'id' => $order['id'],
+            'total' => $order['total'],
+            'firstname' => $customer['firstname'],
+            'surname' => $customer['surname'],
+            'email' => $customer['email'],
+            'address_1' => $address['address_1'],
+            'address_2' => $address['address_2'],
+            'town' => $address['town'],
+            'county' => $address['county'],
+            'postcode' => $address['postcode'],
+        ];
+    }
+    
     /**
      * @var array
      */
-    public $fillable = [ 'customer_id', 'address_id' ];
+    public $fillable = [ 'customer_id', 'address_id', 'total'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

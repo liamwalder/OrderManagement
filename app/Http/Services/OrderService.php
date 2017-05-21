@@ -80,8 +80,13 @@ class OrderService extends Service
         $data['status_id'] = 1;
 
         $order = $this->orderRepository->create($data);
+
         $order->products()->attach($this->manageOrderProducts($data['products']));
         $order->stages()->attach(1);
+
+        $order->total = number_format($order->products->sum('price'), 2);
+        $order->save();
+
         $order = $this->orderTransformer->transformItem($order);
 
         return $order;
