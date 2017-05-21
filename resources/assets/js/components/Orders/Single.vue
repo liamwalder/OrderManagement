@@ -1,22 +1,28 @@
 <template>
     <div id="order-single" class="col-xs-12">
-        <div class="col-xs-12 holder">
 
-            <div class="col-xs-8 order">
-                <div class="col-md-12 order-progress no-padding-left no-padding-right">
-                    <div class="col-md-12"></div>
-                    <div class="col-md-2 stage" v-for="(stage, index) in order.stages">
-                        <div class="icon" v-bind:class="{ active: order.stage_id >= stage.id }" v-html="stage.classes"></div>
-                        <span class="status">{{ stage.name }}</span>
-                        <span class="date">{{ stage.created }}</span>
-                    </div>
-                </div>
+        <div class="col-xs-12 holder order-progress">
+            <div class="col-md-2 stage" v-for="(stage, index) in order.stages">
+                <div class="icon" v-bind:class="{ active: order.stage_id >= stage.id }" v-html="stage.classes"></div>
+                <span class="status">{{ stage.name }}</span>
+                <span class="date">{{ stage.created }}</span>
 
+                <button class="btn btn-md green create-order" @click="progressOrder(nextStage)" v-if="stage.id == nextStage.id">
+                    Mark as {{ nextStage.name }}
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="col-xs-8 no-padding-left">
+            <div class="holder">
+                <h4>Product Summary</h4>
                 <div class="entity-table">
                     <table class="table listing">
                         <thead>
                             <tr>
-                                <th>Product</th>
+                                <th>Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
                             </tr>
@@ -35,10 +41,11 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
+        </div>
 
-            <div class="col-xs-4 customer">
+        <div class="col-xs-4 no-padding-right">
+            <div class="holder">
                 <h4>Customer Details</h4>
                 <table class="customer-details" v-if="order.customer">
                     <tr>
@@ -55,7 +62,6 @@
                     </tr>
                 </table>
 
-                <hr>
                 <h4>Delivery Address</h4>
                 <div class="addresses">
                     <div class="address col-md-12">
@@ -71,18 +77,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-12" v-if="nextStage">
-                <hr>
-                <div class="actions col-md-12 no-padding-right">
-                    <button class="btn btn-md green create-order" @click="progressOrder(nextStage)">
-                        <i class="glyphicon glyphicon-ok-sign"></i>
-                        Mark as {{ nextStage.name }}
-                    </button>
-                </div>
-            </div>
-
         </div>
+
     </div>
 </template>
 

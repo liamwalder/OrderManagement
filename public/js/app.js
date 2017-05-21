@@ -39023,10 +39023,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -71363,14 +71359,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "order-single"
     }
   }, [_c('div', {
-    staticClass: "col-xs-12 holder"
-  }, [_c('div', {
-    staticClass: "col-xs-8 order"
-  }, [_c('div', {
-    staticClass: "col-md-12 order-progress no-padding-left no-padding-right"
-  }, [_c('div', {
-    staticClass: "col-md-12"
-  }), _vm._v(" "), _vm._l((_vm.order.stages), function(stage, index) {
+    staticClass: "col-xs-12 holder order-progress"
+  }, _vm._l((_vm.order.stages), function(stage, index) {
     return _c('div', {
       staticClass: "col-md-2 stage"
     }, [_c('div', {
@@ -71385,8 +71375,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "status"
     }, [_vm._v(_vm._s(stage.name))]), _vm._v(" "), _c('span', {
       staticClass: "date"
-    }, [_vm._v(_vm._s(stage.created))])])
-  })], 2), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(stage.created))]), _vm._v(" "), (stage.id == _vm.nextStage.id) ? _c('button', {
+      staticClass: "btn btn-md green create-order",
+      on: {
+        "click": function($event) {
+          _vm.progressOrder(_vm.nextStage)
+        }
+      }
+    }, [_vm._v("\n                Mark as " + _vm._s(_vm.nextStage.name) + "\n            ")]) : _vm._e()])
+  })), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-8 no-padding-left"
+  }, [_c('div', {
+    staticClass: "holder"
+  }, [_c('h4', [_vm._v("Product Summary")]), _vm._v(" "), _c('div', {
     staticClass: "entity-table"
   }, [_c('table', {
     staticClass: "table listing"
@@ -71394,11 +71395,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', [_c('td', [_vm._v(_vm._s(product.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(product.quantity))]), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(product.price))])])
   }), _vm._v(" "), _c('tr', {
     staticClass: "total"
-  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.order.value))])])], 2)])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-4 customer"
+  }, [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("£" + _vm._s(_vm.order.value))])])], 2)])])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-4 no-padding-right"
+  }, [_c('div', {
+    staticClass: "holder"
   }, [_c('h4', [_vm._v("Customer Details")]), _vm._v(" "), (_vm.order.customer) ? _c('table', {
     staticClass: "customer-details"
-  }, [_c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.firstname) + " " + _vm._s(_vm.order.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(3), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.phone))])])]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
+  }, [_c('tr', [_vm._m(1), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.firstname) + " " + _vm._s(_vm.order.customer.surname))])]), _vm._v(" "), _c('tr', [_vm._m(2), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.email))])]), _vm._v(" "), _c('tr', [_vm._m(3), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.order.customer.phone))])])]) : _vm._e(), _vm._v(" "), _c('h4', [_vm._v("Delivery Address")]), _vm._v(" "), _c('div', {
     staticClass: "addresses"
   }, [_c('div', {
     staticClass: "address col-md-12"
@@ -71406,22 +71409,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "contents"
   }, [(_vm.order.address) ? _c('div', {
     staticClass: "breakdown"
-  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])]) : _vm._e()])])])]), _vm._v(" "), (_vm.nextStage) ? _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('hr'), _vm._v(" "), _c('div', {
-    staticClass: "actions col-md-12 no-padding-right"
-  }, [_c('button', {
-    staticClass: "btn btn-md green create-order",
-    on: {
-      "click": function($event) {
-        _vm.progressOrder(_vm.nextStage)
-      }
-    }
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-ok-sign"
-  }), _vm._v("\n                    Mark as " + _vm._s(_vm.nextStage.name) + "\n                ")])])]) : _vm._e()])])
+  }, [_c('span', [_vm._v(_vm._s(_vm.order.address.address_1))]), _vm._v(" "), (_vm.order.address.address_2) ? _c('span', [_vm._v(_vm._s(_vm.order.address.address_2))]) : _vm._e(), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.town))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.county))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.order.address.postcode))])]) : _vm._e()])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")])])])
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Quantity")]), _vm._v(" "), _c('th', [_vm._v("Price")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('td', [_c('i', {
     staticClass: "fa fa-user",
