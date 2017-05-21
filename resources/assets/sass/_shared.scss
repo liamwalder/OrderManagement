@@ -212,7 +212,14 @@
 
 }
 
-
+.link {
+  color: $blue;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: $blueHover;
+  }
+}
 
 .modal {
   overflow: scroll !important;

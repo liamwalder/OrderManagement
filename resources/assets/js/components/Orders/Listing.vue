@@ -70,6 +70,12 @@
                     case 'stage':
                         headerLabel = 'Status';
                         break;
+                    case 'customer':
+                        headerLabel = 'Customer Name';
+                        break;
+                    case 'address':
+                        headerLabel = 'Customer Address';
+                        break;
                     case 'created_at':
                         headerLabel = 'Ordered Date';
                         break;
