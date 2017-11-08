@@ -78,6 +78,7 @@ class OrderService extends Service
     {
         // Placed
         $data['status_id'] = 1;
+        $data['total'] = $this->calculateTotal($data['products']);
 
         $order = $this->orderRepository->create($data);
         $order->products()->attach($this->manageOrderProducts($data['products']));
@@ -96,6 +97,10 @@ class OrderService extends Service
      */
     public function update($id, array $data)
     {
+        if (isset($data['products'])) {
+            $data['total'] = $this->calculateTotal($data['products']);
+        }
+        
         $order = $this->orderRepository->update($id, $data);
 
         if (isset($data['products'])) {
@@ -123,6 +128,19 @@ class OrderService extends Service
 
     /**
      * @param $orderProducts
+     * @return int
+     */
+    protected function calculateTotal($orderProducts)
+    {
+        $total = 0;
+        foreach ($orderProducts as $product) {
+            $total += ($product['quantity'] * $product['price']);
+        }
+        return $total;
+    }
+
+    /**
+     * @param $orderProducts
      * @return mixed
      */
     protected function manageOrderProducts($orderProducts)
@@ -135,7 +153,6 @@ class OrderService extends Service
                 $products[] = $productId;
             }
         }
-
         return $products;
     }
 

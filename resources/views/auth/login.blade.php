@@ -38,11 +38,11 @@
 
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input class="form-control" name="email"/>
+                            <input class="form-control" name="email" value="liamwalder@hotmail.co.uk" />
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" name="password" />
+                            <input type="password" class="form-control" name="password" value="password" />
                         </div>
                         <button type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>" class="btn btn-default btn-block green">Login</button>
                     </form>

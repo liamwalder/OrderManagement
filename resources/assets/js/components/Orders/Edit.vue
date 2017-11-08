@@ -27,7 +27,7 @@
                 self.customer = response.data.customer;
                 self.address = response.data.address;
                 self.totalPrice = response.data.value;
-                this.updateTotal();
+                self.updateTotal();
             })
             .catch(function (error) {});
         },
@@ -38,12 +38,10 @@
 
             sendOrderRequest(submission) {
                 let self = this;
-
                 submission._method = 'PATCH';
-
                 axios.post(Routes.order.edit.replace('{id}', this.id), submission)
                 .then(function (response) {
-                    window.location = "/orders";
+                    window.location = "/orders/" + self.id;
                 })
                 .catch(function (error) {
                     self.errors = error.response.data;

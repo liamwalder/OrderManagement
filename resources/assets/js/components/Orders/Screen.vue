@@ -127,8 +127,6 @@
             quantityChange(product) {
                 let price = product.originalPrice;
                 let quantity = product.quantity;
-                console.log(price);
-                console.log(quantity);
                 product.price = (Math.round((price * quantity) * 100) / 100).toFixed(2);
                 this.updateTotal();
             },
@@ -169,17 +167,22 @@
                 let self = this;
                 this.totalPrice = 0;
                 this.products.forEach(function (product, key) {
-                    self.totalPrice += (product.originalPrice * product.quantity);
+                    let productPrice = (product.originalPrice * product.quantity);
+                    self.totalPrice = parseInt(self.totalPrice) + parseInt(productPrice);
                 });
                 this.totalPrice = Math.round(this.totalPrice * 100) / 100;
                 this.totalPrice = this.totalPrice.toFixed(2);
             },
 
+            /**
+             *
+             */
             placeOrder() {
                 let products = [];
                 this.products.forEach(function (product, key) {
                     products.push({
                         id: product.id,
+                        price: product.originalPrice,
                         quantity: product.quantity
                     });
                 });
@@ -198,6 +201,10 @@
                 this.sendOrderRequest(submission);
             },
 
+            /**
+             *
+             * @param submission
+             */
             sendOrderRequest(submission) {
                 let self = this;
 

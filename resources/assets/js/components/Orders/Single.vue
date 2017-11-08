@@ -7,7 +7,7 @@
                 <span class="status">{{ stage.name }}</span>
                 <span class="date">{{ stage.created }}</span>
 
-                <button class="btn btn-md green create-order" @click="progressOrder(nextStage)" v-if="stage.id == nextStage.id">
+                <button class="btn btn-md green create-order" @click="progressOrder(nextStage)" v-if="nextStage && (stage.id == nextStage.id)">
                     Mark as {{ nextStage.name }}
                 </button>
 
@@ -94,7 +94,7 @@
         data: function() {
             return {
                 order: [],
-                nextStage: null
+                nextStage: []
             }
         },
 
@@ -114,6 +114,10 @@
                 .catch(function (error) {});
             },
 
+            /**
+             *
+             * @param nextStage
+             */
             progressOrder(nextStage) {
                 let self = this;
 
@@ -144,7 +148,7 @@
                 });
 
                 if (foundNextStage == false) {
-                    self.nextStage = null;
+                    self.nextStage = [];
                 }
 
             }

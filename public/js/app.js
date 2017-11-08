@@ -38566,18 +38566,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             self.customer = response.data.customer;
             self.address = response.data.address;
             self.totalPrice = response.data.value;
-            this.updateTotal();
+            self.updateTotal();
         }).catch(function (error) {});
     },
 
     methods: {
         sendOrderRequest: function sendOrderRequest(submission) {
             var self = this;
-
             submission._method = 'PATCH';
-
             axios.post(Routes.order.edit.replace('{id}', this.id), submission).then(function (response) {
-                window.location = "/orders";
+                window.location = "/orders/" + self.id;
             }).catch(function (error) {
                 self.errors = error.response.data;
             });
@@ -38854,8 +38852,6 @@ module.exports = {
         quantityChange: function quantityChange(product) {
             var price = product.originalPrice;
             var quantity = product.quantity;
-            console.log(price);
-            console.log(quantity);
             product.price = (Math.round(price * quantity * 100) / 100).toFixed(2);
             this.updateTotal();
         },
@@ -38892,16 +38888,23 @@ module.exports = {
             var self = this;
             this.totalPrice = 0;
             this.products.forEach(function (product, key) {
-                self.totalPrice += product.originalPrice * product.quantity;
+                var productPrice = product.originalPrice * product.quantity;
+                self.totalPrice = parseInt(self.totalPrice) + parseInt(productPrice);
             });
             this.totalPrice = Math.round(this.totalPrice * 100) / 100;
             this.totalPrice = this.totalPrice.toFixed(2);
         },
+
+
+        /**
+         *
+         */
         placeOrder: function placeOrder() {
             var products = [];
             this.products.forEach(function (product, key) {
                 products.push({
                     id: product.id,
+                    price: product.originalPrice,
                     quantity: product.quantity
                 });
             });
@@ -38919,6 +38922,12 @@ module.exports = {
 
             this.sendOrderRequest(submission);
         },
+
+
+        /**
+         *
+         * @param submission
+         */
         sendOrderRequest: function sendOrderRequest(submission) {
             var self = this;
 
@@ -39034,7 +39043,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             order: [],
-            nextStage: null
+            nextStage: []
         };
     },
 
@@ -39050,6 +39059,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 self.workOutNextStage();
             }).catch(function (error) {});
         },
+
+
+        /**
+         *
+         * @param nextStage
+         */
         progressOrder: function progressOrder(nextStage) {
             var self = this;
 
@@ -39077,7 +39092,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             if (foundNextStage == false) {
-                self.nextStage = null;
+                self.nextStage = [];
             }
         }
     }
@@ -71375,7 +71390,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "status"
     }, [_vm._v(_vm._s(stage.name))]), _vm._v(" "), _c('span', {
       staticClass: "date"
-    }, [_vm._v(_vm._s(stage.created))]), _vm._v(" "), (stage.id == _vm.nextStage.id) ? _c('button', {
+    }, [_vm._v(_vm._s(stage.created))]), _vm._v(" "), (_vm.nextStage && (stage.id == _vm.nextStage.id)) ? _c('button', {
       staticClass: "btn btn-md green create-order",
       on: {
         "click": function($event) {
