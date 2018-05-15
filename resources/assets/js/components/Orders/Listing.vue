@@ -30,7 +30,7 @@
                     <td v-for="key in columns" v-html="transform(entry[key], key)"></td>
                     <td>
                         <div class="pull-right">
-                            <a class="btn btn-sm blue hollow" @click="view(entry)"><i class="fa fa-eye" aria-hidden="true"></i> View Order</a>
+                            <a class="btn btn-sm blue hollow" @click="view(entry)">View</a>
                         </div>
                     </td>
                 </tr>
@@ -62,7 +62,7 @@
                 let headerLabel = '';
                 switch (key) {
                     case 'id':
-                        headerLabel = 'Reference';
+                        headerLabel = 'ID';
                         break;
                     case 'value':
                         headerLabel = 'Total';
@@ -71,13 +71,13 @@
                         headerLabel = 'Status';
                         break;
                     case 'customer':
-                        headerLabel = 'Customer Name';
+                        headerLabel = 'Name';
                         break;
                     case 'address':
-                        headerLabel = 'Customer Address';
+                        headerLabel = 'Address';
                         break;
                     case 'created_at':
-                        headerLabel = 'Ordered Date';
+                        headerLabel = 'Date';
                         break;
                     default:
                         headerLabel = key;
