@@ -10,6 +10,7 @@
         "hesto/multi-auth": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "mbezhanov/faker-provider-collection": "^1.0",
         "nicolaslopezj/searchable": "^1.9"
     },
     "require-dev": {
