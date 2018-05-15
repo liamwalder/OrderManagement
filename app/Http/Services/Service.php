@@ -22,9 +22,12 @@ class Service
     public function pagination($model)
     {
         $entityClass = new $model;
+
         $page = Input::get('page', 1);
         $perPage = Input::get('per-page', 25);
+
         $showing = ($page * $perPage);
+
         $total = $entityClass::count();
 
         if ($total < $showing) {

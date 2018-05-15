@@ -18,7 +18,6 @@ class OrderSeeder extends Seeder
 
             $customerId = rand(1, 10);
 
-
             $products = [];
             for ($productsToAdd = 1; $productsToAdd < rand(1, 10); $productsToAdd++) {
                 $products[] = \App\Product::findOrFail(rand(1, 50));
